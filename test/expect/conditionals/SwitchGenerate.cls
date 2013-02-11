@@ -1,5 +1,6 @@
 public class SwitchGenerate
 {
+    public void check()
     {
         if ( favoriteLanguage == 'Ruby' )
         {

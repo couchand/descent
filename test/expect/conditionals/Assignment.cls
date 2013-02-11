@@ -1,5 +1,6 @@
 public class Assignment
 {
+    public void check()
     {
         if  ( friday )
         {

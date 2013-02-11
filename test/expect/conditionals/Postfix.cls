@@ -1,5 +1,6 @@
 public class Postfix
 {
+    public void check()
     {
         if ( singing )
         {

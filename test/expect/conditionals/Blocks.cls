@@ -1,5 +1,6 @@
 public class Blocks
 {
+    public void check()
     {
         if ( happy && knowsIt )
         {
