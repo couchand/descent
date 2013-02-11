@@ -20,11 +20,11 @@ Assignment
 SwitchGenerate
   check ->
     switch favoriteLanguage
-    case 'Ruby'
+    when 'Ruby'
       print 'Ruby is great'
-    case 'JavaScript', 'ActionScript'
+    when 'JavaScript', 'ActionScript'
       print 'Love making web apps'
-    case 'Descent'
+    when 'Descent'
       print 'Of course'
-    default
+    else
       print "I don't know that one"
