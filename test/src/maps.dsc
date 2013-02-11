@@ -5,3 +5,12 @@ Aliases
       print 'my cat'
     for cat of catColors
       print cat + ' is ' + catColors[cat]
+
+Literals
+  kids =
+    brother:
+      name: 'Max'
+      age: 11
+    sister:
+      name: 'Ida'
+      age: 9

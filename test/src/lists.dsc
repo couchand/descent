@@ -1,4 +1,4 @@
-Foobar
+Literals
   song = ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti', 'do']
 
   singers = { Jagger: 'Rock', Elvis: 'Roll' }
@@ -8,14 +8,6 @@ Foobar
     0, 0, 1
     1, 1, 0
   ]
-
-  kids =
-    brother:
-      name: 'Max'
-      age: 11
-    sister:
-      name: 'Ida'
-      age: 9
 
 Slice
   doIt ->
