@@ -17,3 +17,18 @@ Comprehensions
 
     ages = for child, age of yearsOld
       "#{child} is #{age}"
+
+WhileLoop
+  econ101 ->
+    if this.studyingEconomics
+      buy()  while supply > demand
+      sell() until supply > demand
+
+  nurseryRhyme ->
+    num = 6
+    lyrics = while num -= 1
+      "#{num} little monkeys, jumping on the bed.
+        One fell out and bumped his head."
+
+  doIt ->
+    application.run() loop
