@@ -21,6 +21,6 @@ public class Foobar
 
     public void log( String msg )
     {
-        System.log( msg );
+        System.debug( msg );
     }
 }
