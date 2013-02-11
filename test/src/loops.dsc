@@ -44,4 +44,5 @@ WhileLoop
         One fell out and bumped his head."
 
   purgatory ->
-    econ101() loop
+    loop
+      econ101()
