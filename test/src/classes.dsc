@@ -13,6 +13,7 @@ global Baz
 MyClass
   instanceProperty = 'foo'
   ::classProperty = 'bar'
+  ::CLASS_CONSTANT = 3.141592653
 
   instanceMethod ->
     classMethod instanceProperty

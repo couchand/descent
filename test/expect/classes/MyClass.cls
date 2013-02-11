@@ -4,6 +4,8 @@ public class MyClass
 
     public static String classProperty = 'bar';
 
+    public static final Decimal CLASS_CONSTANT = 3.141592653;
+
     public String instanceMethod()
     {
         return classMethod( instanceProperty );
