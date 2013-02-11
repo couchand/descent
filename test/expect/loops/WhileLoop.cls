@@ -1,5 +1,19 @@
 public class WhileLoop
 {
+    Boolean studyingEconomics = true;
+    Integer supply = 5;
+    Integer demand = 4;
+
+    public Integer buy()
+    {
+        return --supply;
+    }
+
+    public Integer sell()
+    {
+        return --demand;
+    }
+
     public void econ101()
     {
         if ( this.studyingEconomics )
@@ -26,11 +40,11 @@ public class WhileLoop
         }
     }
 
-    public void doIt()
+    public void purgatory()
     {
         while ( true )
         {
-            application.run();
+            econ101();
         }
     }
 }

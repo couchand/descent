@@ -1,5 +1,15 @@
 public class Basic
 {
+    public void eat( String food )
+    {
+        System.debug( 'eating ' + food );
+    }
+
+    public void menu( Integer num, String item )
+    {
+        System.debug( '' + num + '.) ' + item );
+    }
+
     public void doStuff()
     {
         for ( String food : new List<String>{ 'toast', 'cheese', 'wine' } )

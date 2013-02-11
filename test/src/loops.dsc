@@ -1,4 +1,10 @@
 Basic
+  eat (food) ->
+    print "eating #{food}"
+
+  menu (num, item) ->
+    print "#{num}.) #{item}"
+
   doStuff ->
     eat food for food in ['toast', 'cheese', 'wine']
 
@@ -19,6 +25,13 @@ Comprehensions
       "#{child} is #{age}"
 
 WhileLoop
+  studyingEconomics = yes
+  supply = 5
+  demand = 4
+
+  buy -> --supply
+  sell -> --demand
+
   econ101 ->
     if this.studyingEconomics
       buy()  while supply > demand
@@ -30,5 +43,5 @@ WhileLoop
       "#{num} little monkeys, jumping on the bed.
         One fell out and bumped his head."
 
-  doIt ->
-    application.run() loop
+  purgatory ->
+    econ101() loop
