@@ -1,5 +1,7 @@
 public class SwitchGenerate
 {
+    String favoriteLanguage = 'Sass';
+
     public void check()
     {
         if ( favoriteLanguage == 'Ruby' )
