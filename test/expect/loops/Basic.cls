@@ -2,7 +2,7 @@ public class Basic
 {
     public void doStuff()
     {
-        for ( String food in ['toast', 'cheese', 'wine'] )
+        for ( String food : new List<String>{ 'toast', 'cheese', 'wine' } )
         {
             eat( food );
         }
@@ -11,13 +11,13 @@ public class Basic
 
         for ( Integer i = 0; i < courses.size(); i++ )
         {
-            String dish = courses[i];
+            String dish = courses.get( i );
             menu( i + 1, dish );
         }
 
         List<String> foods = new List<String>{ 'broccoli', 'spinach', 'chocolate' }
 
-        for ( String food in foods )
+        for ( String food : foods )
         {
             if ( food != 'chocolate' )
             {
