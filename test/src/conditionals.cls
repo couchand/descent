@@ -1,10 +1,10 @@
 Postfix
-  check
+  check ->
     mood = greatlyImproved if singing
     goForPicnic() unless raining
 
 Blocks
-  check
+  check ->
     if happy and knowsIt
       clapHands()
       chaChaCha()
@@ -14,11 +14,11 @@ Blocks
       playHookey()
 
 Assignment
-  check
+  check ->
     date = if friday then sue else jill
 
 SwitchGenerate
-  check
+  check ->
     switch favoriteLanguage
     case 'Ruby'
       System.log 'Ruby is great'

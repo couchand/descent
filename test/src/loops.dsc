@@ -1,5 +1,5 @@
 Basic
-  doStuff
+  doStuff ->
     eat food for food in ['toast', 'cheese', 'wine']
 
     courses = ['greens', 'caviar', 'truffles', 'roast', 'cake']
@@ -9,10 +9,10 @@ Basic
     eat food for food in foods when food isnt 'chocolate'
 
 Comprehensions
-  doStuff
+  doStuff ->
     countdown = (num for num in [10..1])
 
-  maps
+  maps ->
     yearsOld = max: 10, ida: 9, tim: 11
 
     ages = for child, age of yearsOld
