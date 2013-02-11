@@ -1,10 +1,15 @@
 public class Exist
 {
+    String mind = 'blown';
+    String world;
+    String yeti;
+    Lottery lottery = new Lottery();
+
     public basicCheck()
     {
         Boolean solipsism;
         Integer speed;
-        Object footprints;
+        String footprints;
 
         if ( mind != null && !( world != null ) )
         {
@@ -37,5 +42,22 @@ public class Exist
                 zip = ref.address.zipcode;
             }
         }
+    }
+    public class Lottery
+    {
+        public Person drawWinner()
+        {
+            return new Person();
+        }
+    }
+
+    public class Person
+    {
+        Address address;
+    }
+
+    public class Address
+    {
+        String zipcode;
     }
 }
