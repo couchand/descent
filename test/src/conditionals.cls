@@ -22,7 +22,7 @@ SwitchGenerate
     switch favoriteLanguage
     case 'Ruby'
       print 'Ruby is great'
-    case 'JavaScript'
+    case 'JavaScript', 'ActionScript'
       print 'Love making web apps'
     case 'Descent'
       print 'Of course'

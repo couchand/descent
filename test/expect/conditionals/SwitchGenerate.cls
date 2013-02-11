@@ -6,7 +6,7 @@ public class SwitchGenerate
         {
             System.debug('Ruby is great');
         }
-        else if ( favoriteLanguage == 'JavaScript' )
+        else if ( favoriteLanguage == 'JavaScript' || favoriteLanguage == 'ActionScript' )
         {
             System.debug('Love making web apps');
         }
