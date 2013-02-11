@@ -21,10 +21,10 @@ SwitchGenerate
   check ->
     switch favoriteLanguage
     case 'Ruby'
-      System.log 'Ruby is great'
+      print 'Ruby is great'
     case 'JavaScript'
-      System.log 'Love making web apps'
+      print 'Love making web apps'
     case 'Descent'
-      System.log 'Of course'
+      print 'Of course'
     default
-      System.log "I don't know that one"
+      print "I don't know that one"

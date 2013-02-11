@@ -6,11 +6,11 @@ public class Aliases
 
         if ( cats.contains( someCat ) )
         {
-            System.log('my cat');
+            System.debug('my cat');
         }
 
         for ( String cat : cats )
         {
-            System.log( cat );
+            System.debug( cat );
         }
 }

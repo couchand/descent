@@ -6,12 +6,12 @@ public class Aliases
 
         if ( catColors.containsKey( someCat ) )
         {
-            System.log('my cat');
+            System.debug('my cat');
         }
 
         for ( String cat : catColors.keySet() )
         {
-            System.log( cat + ' is ' + catColors[cat] );
+            System.debug( cat + ' is ' + catColors[cat] );
         }
     }
 }

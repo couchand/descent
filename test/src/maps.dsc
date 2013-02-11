@@ -2,6 +2,6 @@ Aliases
   in ->
     catColors = { 'Igor': 'black', 'Peggy Sue': 'tortiseshell' }
     if someCat in catColors
-      System.log 'my cat'
+      print 'my cat'
     for cat of catColors
-      System.log cat + ' is ' + catColors[cat]
+      print cat + ' is ' + catColors[cat]
