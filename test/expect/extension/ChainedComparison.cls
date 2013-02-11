@@ -1,8 +1,9 @@
 public class ChainedComparison
 {
+    Integer cholesterol = 127;
+
     public Boolean healthy()
     {
-        Integer cholesterol = 127;
         return ( 200 > cholesterol && cholesterol > 60 );
     }
 }
