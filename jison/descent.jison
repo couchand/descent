@@ -11,7 +11,7 @@ class_list
   : cls
     { $$ = [$cls]; }
   | class_list NEWLINE cls
-    { $$ = $class_list; $$.unshift($cls); }
+    { $$ = $class_list; $$.push($cls); }
   ;
 
 cls
@@ -33,7 +33,7 @@ class_members
   : class_member
     { $$ = [$class_member]; }
   | class_members NEWLINE class_member
-    { $$ = $class_members; $$.unshift($class_member) }
+    { $$ = $class_members; $$.push($class_member) }
   ;
 
 class_member
