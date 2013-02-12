@@ -6,7 +6,31 @@
 
 pwd
 
-if [ "$1" == "clean" ] ; then
+TASK="$1"
+
+if [ "$TASK" == "" ] ; then
+  TASK="all"
+fi
+
+if [ "$TASK" == "clean" ] ; then
+  CLEAN=1
+  BUILD=0
+  TEST=0
+elif [ "$TASK" == "build" ] ; then
+  CLEAN=1
+  BUILD=1
+  TEST=0
+elif [ "$TASK" == "test" ] ; then
+  CLEAN=0
+  BUILD=0
+  TEST=1
+elif [ "$TASK" == "all" ] ; then
+  CLEAN=1
+  BUILD=1
+  TEST=1
+fi
+
+if [ "$CLEAN" == 1 ] ; then
   echo "deleting build dir"
   echo "> rf -rf dst/"
   rm -rf dst/
@@ -14,16 +38,9 @@ if [ "$1" == "clean" ] ; then
   echo "deleting test build dir"
   echo "> rf -rf test/dst/"
   rm -rf test/dst/
-elif [ "$1" == "test" ] ; then
-  echo "building lexer tests"
-  echo "> coffee -c -o test/dst/ test/coffee/"
-  coffee -c -o test/dst/ test/coffee/
+fi
 
-  echo "running lexer tests"
-  echo "> node test/dst/lexer_test.js"
-  node test/dst/lexer_test.js
-  node test/dst/parser_test.js
-else
+if [ "$BUILD" == 1 ] ; then
   echo "creating build dir"
   echo "> mkdir dst"
   mkdir dst
@@ -39,4 +56,15 @@ else
   echo "patching parser"
   echo "> patch dst/parser.js < loadLexer.patch"
   patch dst/parser.js < loadLexer.patch
+fi
+
+if [ "$TEST" == 1 ] ; then
+  echo "building lexer tests"
+  echo "> coffee -c -o test/dst/ test/coffee/"
+  coffee -c -o test/dst/ test/coffee/
+
+  echo "running lexer tests"
+  echo "> node test/dst/lexer_test.js"
+  node test/dst/lexer_test.js
+  node test/dst/parser_test.js
 fi
