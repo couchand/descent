@@ -10,6 +10,18 @@ if [ "$1" == "clean" ] ; then
   echo "deleting build dir"
   echo "> rf -rf dst/"
   rm -rf dst/
+
+  echo "deleting test build dir"
+  echo "> rf -rf test/dst/"
+  rm -rf test/dst/
+elif [ "$1" == "test" ] ; then
+  echo "building lexer tests"
+  echo "> coffee -c -o test/dst/ test/coffee/"
+  coffee -c -o test/dst/ test/coffee/
+
+  echo "running lexer tests"
+  echo "> node test/dst/lexer_test.js"
+  node test/dst/lexer_test.js
 else
   echo "creating build dir"
   echo "> mkdir dst"
