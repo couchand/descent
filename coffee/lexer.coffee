@@ -1,5 +1,10 @@
 class DescentLexer
   constructor: (@rules) ->
+
+  setInput: (@input) ->
+    @cursor = 0
+    @indent = 0
+
   lex: ->
     return 'EOF' if @cursor >= @input.length
     matches = @matchingRules()
@@ -19,10 +24,6 @@ class DescentLexer
     for match in matches
       longest = match if match.match.length > longest.match.length
     longest
-
-  setInput: (@input) ->
-    @cursor = 0
-    @indent = 0
 
 class Rule
   constructor: (@pattern, @token) ->
