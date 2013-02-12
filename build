@@ -66,5 +66,7 @@ if [ "$TEST" == 1 ] ; then
   echo "running lexer tests"
   echo "> node test/dst/lexer_test.js"
   node test/dst/lexer_test.js
+  echo "running parser tests"
+  echo "> node test/dst/parser_test.js"
   node test/dst/parser_test.js
 fi
