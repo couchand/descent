@@ -22,6 +22,7 @@ elif [ "$1" == "test" ] ; then
   echo "running lexer tests"
   echo "> node test/dst/lexer_test.js"
   node test/dst/lexer_test.js
+  node test/dst/parser_test.js
 else
   echo "creating build dir"
   echo "> mkdir dst"
