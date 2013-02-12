@@ -3,7 +3,7 @@
 %%
 
 file
-  : class_list EOF
+  : class_list NEWLINE EOF
     { return $class_list; }
   ;
 
