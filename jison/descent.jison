@@ -15,10 +15,10 @@ class_list
   ;
 
 cls
-  : class_name NEWLINE
+  : class_name
     { $$ = [$class_name]; }
   | class_name NEWLINE class_body
-    { $$ = [$class_name, $class_members]; }
+    { $$ = [$class_name, $class_body]; }
   ;
 
 class_name

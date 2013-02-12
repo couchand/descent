@@ -7,11 +7,17 @@ class DescentLexer
     @cursor = 0
     @indent = 0
     @backlog = []
+    @awaiting = []
+
+  eof: ->
+    @cursor >= @input.length
 
   lex: ->
     return @backlog.shift() if @backlog.length
 
-    return 'EOF' if @cursor >= @input.length
+    return @awaiting.shift() if @awaiting.length and @eof()
+    return 'EOF' if @eof()
+
     newline_tokens = @checkForNewlines()
     return newline_tokens[0] if newline_tokens.length is 1
     if newline_tokens.length
@@ -48,9 +54,11 @@ class DescentLexer
     new_indent = tab_chars / @tabstop
     while new_indent > @indent
       tokens.push 'INDENT'
+      @awaiting.push 'DEDENT'
       ++@indent
     while new_indent < @indent
-      tokens.push 'DEDENT'
+      tokens.unshift 'DEDENT'
+      @awaiting.shift 'DEDENT'
       --@indent
     @cursor += tab_chars
     tokens
@@ -64,6 +72,7 @@ class Rule
 basicLexer = new DescentLexer()
 basicLexer.rules.push new Rule /^[a-zA-Z]+/, 'VAR'
 basicLexer.rules.push new Rule /^[0-9]+/, 'NUM'
+basicLexer.rules.push new Rule /^=/, '='
 
 module.exports =
   DescentLexer: DescentLexer
