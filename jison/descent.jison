@@ -15,9 +15,7 @@ class_list
   ;
 
 cls
-  : class_name
-    { $$ = [$class_name]; }
-  | class_name NEWLINE class_body
+  : class_name NEWLINE class_body
     { $$ = [$class_name, $class_body]; }
   ;
 
