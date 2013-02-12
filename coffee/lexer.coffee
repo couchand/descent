@@ -61,6 +61,11 @@ class Rule
     match = part.match @pattern
     if match then match[0] else false
 
+basicLexer = new DescentLexer()
+basicLexer.rules.push new Rule /^[a-zA-Z]+/, 'VAR'
+basicLexer.rules.push new Rule /^[0-9]+/, 'NUM'
+
 module.exports =
   DescentLexer: DescentLexer
   Rule: Rule
+  basicLexer: basicLexer
