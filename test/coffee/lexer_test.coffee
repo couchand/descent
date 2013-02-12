@@ -45,3 +45,40 @@ assertEqual lexer.lex(), 'NEWLINE'
 assertEqual lexer.lex(), 'DEDENT'
 assertEqual lexer.lex(), 'FOO'
 assertEqual lexer.lex(), 'EOF'
+
+
+
+
+l = new dl.DescentLexer
+
+l.rules.push new dl.Rule /^[a-zA-Z][a-zA-Z0-9_]+/, 'IDENTIFIER'
+l.rules.push new dl.Rule /^( |\t)/, 'WHITESPACE'
+l.rules.push new dl.Rule /^=/, '='
+l.rules.push new dl.Rule /^[0-9]+/, 'NUM'
+
+l.setInput 'Foobar\n  myProperty = 5\n  otherProperty = 5\n\n  myFunction\n    innerVar = 7'
+
+assertEqual l.lex(), 'IDENTIFIER'
+assertEqual l.lex(), 'NEWLINE'
+assertEqual l.lex(), 'INDENT'
+assertEqual l.lex(), 'IDENTIFIER'
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), '='
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), 'NUM'
+assertEqual l.lex(), 'NEWLINE'
+assertEqual l.lex(), 'IDENTIFIER'
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), '='
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), 'NUM'
+assertEqual l.lex(), 'NEWLINE'
+assertEqual l.lex(), 'IDENTIFIER'
+assertEqual l.lex(), 'NEWLINE'
+assertEqual l.lex(), 'INDENT'
+assertEqual l.lex(), 'IDENTIFIER'
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), '='
+assertEqual l.lex(), 'WHITESPACE'
+assertEqual l.lex(), 'NUM'
+assertEqual l.lex(), 'EOF'
