@@ -34,4 +34,8 @@ else
   echo "building parser"
   echo "> jison -o dst/parser.js jison/descent.js"
   jison -o dst/parser.js jison/descent.jison
+
+  echo "patching parser"
+  echo "> patch dst/parser.js < loadLexer.patch"
+  patch dst/parser.js < loadLexer.patch
 fi
