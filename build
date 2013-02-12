@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# build script for descent
+
+# as soon as possible, convert to grunt
+
+pwd
+
+if [ "$1" == "clean" ] ; then
+  echo "deleting build dir"
+  echo "> rf -rf dst/"
+  rm -rf dst/
+else
+  echo "creating build dir"
+  echo "> mkdir dst"
+  mkdir dst
+
+  echo "building coffeescripts"
+  echo "> coffee -c -o dst/ coffee/"
+  coffee -c -o dst/ coffee/
+
+  echo "building parser"
+  echo "> jison -o dst/parser.js jison/descent.js"
+  jison -o dst/parser.js jison/descent.jison
+fi
