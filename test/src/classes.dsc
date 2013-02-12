@@ -1,5 +1,5 @@
-public Foobar
-  public InnerPublic
+Foobar
+  InnerPublic
   private InnerPrivate
 
 global Baz
