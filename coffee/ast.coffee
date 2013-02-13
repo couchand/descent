@@ -18,8 +18,10 @@ class ApexClass
       @methods.push member if member instanceof Method
 
   compile: ->
-    members = (property.compile() for property in @properties).join ';\n    '
-    members += ';\n\n    ' if members isnt ''
+    members = ''
+    for property in @properties
+      members += property.compile().replace /\n/g, "\n    "
+      members += '\n\n    '
     for method in @methods
       members += method.compile().replace /\n/g, "\n    "
     "public class #{@name}\n{\n    #{members}\n}\n"
@@ -29,9 +31,11 @@ class Property
     @variable = variable
     @default_val = def
   compile: ->
-    s = "public Object #{@variable.compile()}"
-    s += " = #{@default_val.compile()}" if @default_val?
-    s
+    v = @variable.compile()
+    getter = if !@default_val? then 'get;' else "get\n{\n    if ( #{v} == null )\n    {\n        #{v} = #{@default_val.compile()};\n    }\n    return #{v};\n}"
+    getter = getter.replace /\n/g, '\n    '
+    setter = "set;"
+    "public Object #{v}" + "\n{\n    #{getter}\n    #{setter}\n}"
 
 class Method
   constructor: (identifier, parameters, body) ->
