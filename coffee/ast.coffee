@@ -13,9 +13,9 @@ class Body
     @classes = []
 
 class ApexClass
-  constructor: (name, body) ->
+  constructor: (name, visibility, body) ->
     @name = name
-    @visibility = PUBLIC
+    @visibility = visibility or PUBLIC
     @properties = []
     @methods = []
     @inners = []
@@ -43,9 +43,9 @@ class ApexClass
     """
 
 class Property
-  constructor: (variable, def) ->
+  constructor: (variable, visibility, def) ->
     @variable = variable
-    @visibility = PUBLIC
+    @visibility = visibility or PUBLIC
     @default_val = def
   compile: ->
     visibility = @visibility.compile()

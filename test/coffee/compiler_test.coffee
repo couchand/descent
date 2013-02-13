@@ -16,7 +16,11 @@ assertEqual m.compile(), 'public void foobar( a, b, c )\n{\n    1\n}'
 m = new ast.Method mock('foobar'), [], [mock('baz')]
 assertEqual m.compile(), 'public void foobar()\n{\n    baz\n}'
 
-p = new ast.Property mock('foobar'), mock('baz')
+p = new ast.Property mock('foobar'), null, mock('baz')
 assertEqual p.compile(), 'public Object foobar\n{\n    get\n    {\n        if ( foobar == null )\n        {\n            foobar = baz;\n        }\n        return foobar;\n    }\n    set;\n}'
 p = new ast.Property mock('foobar')
 assertEqual p.compile(), 'public Object foobar\n{\n    get;\n    set;\n}'
+p = new ast.Property mock('foobar'), ast.GLOBAL, mock('baz')
+assertEqual p.compile(), 'global Object foobar\n{\n    get\n    {\n        if ( foobar == null )\n        {\n            foobar = baz;\n        }\n        return foobar;\n    }\n    set;\n}'
+p = new ast.Property mock('foobar'), ast.PRIVATE
+assertEqual p.compile(), 'private Object foobar\n{\n    get;\n    set;\n}'

@@ -16,7 +16,20 @@ class_list
 
 cls
   : class_name NEWLINE class_body
-    { $$ = new ast.ApexClass( $class_name, $class_body ); }
+    { $$ = new ast.ApexClass( $class_name, null, $class_body ); }
+  | visibility class_name NEWLINE class_body
+    { $$ = new ast.ApexClass( $class_name, $visibility, $class_body ); }
+  ;
+
+visibility
+  : GLOBAL
+    { $$ = ast.GLOBAL; }
+  | PUBLIC
+    { $$ = ast.PUBLIC; }
+  | READABLE
+    { $$ = ast.READABLE; }
+  | PRIVATE
+    { $$ = ast.PRIVATE; }
   ;
 
 class_name
@@ -77,10 +90,14 @@ method_body
   ;
 
 property
-  : assignee
+  : visibility assignee
+    { $$ = new ast.Property( $assignee, $visibility ); }
+  | visibility assignee '=' value
+    { $$ = new ast.Property( $assignee, $visibility, $value ); }
+  | assignee
     { $$ = new ast.Property( $assignee ); }
   | assignee '=' value
-    { $$ = new ast.Property( $assignee, $value ); }
+    { $$ = new ast.Property( $assignee, null, $value ); }
   ;
 
 assignee
