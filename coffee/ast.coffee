@@ -41,7 +41,20 @@ class Property
     @default_val = def
   compile: ->
     v = @variable.compile()
-    getter = if !@default_val? then 'get;' else "get\n{\n    if ( #{v} == null )\n    {\n        #{v} = #{@default_val.compile()};\n    }\n    return #{v};\n}"
+    getter = 'get'
+    if !@default_val?
+       getter += ';'
+    else
+      getter += '\n'
+      getter += """
+                {
+                    if ( #{v} == null )
+                    {
+                        #{v} = #{@default_val.compile()};
+                    }
+                    return #{v};
+                }
+                """
     setter = "set;"
     getter = indent getter
     setter = indent setter
