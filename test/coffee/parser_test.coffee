@@ -21,20 +21,16 @@ validateClasses = (classes) ->
   assertEqual brooklynProperties.length, 1
 
   assertEqual foobarProperties[0][0].name, 'foo', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[0][1][0], 'num', 'the right hand side should be a number'
-  assertEqual foobarProperties[0][1][1], '1', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[0][1].value, '1', 'the number should be the right hand side of the assignment'
 
   assertEqual foobarProperties[1][0].name, 'bar', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[1][1][0], 'num', 'the right hand side should be a number'
-  assertEqual foobarProperties[1][1][1], '2', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[1][1].value, '2', 'the number should be the right hand side of the assignment'
 
   assertEqual foobarProperties[2][0].name, 'baz', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[2][1][0], 'num', 'the right hand side should be a number'
-  assertEqual foobarProperties[2][1][1], '3', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[2][1].value, '3', 'the number should be the right hand side of the assignment'
 
   assertEqual brooklynProperties[0][0].name, 'city', 'the left hand side name should be parsed'
-  assertEqual brooklynProperties[0][1][0], 'num', 'the right hand side should be a number'
-  assertEqual brooklynProperties[0][1][1], '1', 'the right hand side name should be parsed'
+  assertEqual brooklynProperties[0][1].value, '1', 'the right hand side name should be parsed'
 
 classes = p.parse 'Foobar\n  foo = 1\n  bar = 2\n  baz = 3\n\nBrooklyn\n  city = 1\n'
 validateClasses classes

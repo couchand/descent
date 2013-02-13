@@ -23,8 +23,10 @@ class Method
     @body = []
 
 class Variable
-  constructor: (name) ->
-    @name = name
+  constructor: (@name) ->
+
+class IntLiteral
+  constructor: (@value) ->
 
 module.exports = {
   Body: Body
@@ -32,4 +34,5 @@ module.exports = {
   Property: Property
   Method: Method
   Variable: Variable
+  IntLiteral: IntLiteral
 }

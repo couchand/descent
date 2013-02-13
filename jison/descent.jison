@@ -85,7 +85,7 @@ value
   : VAR
     { $$ = new ast.Variable( yytext ); }
   | NUM
-    { $$ = ['num', yytext]; }
+    { $$ = new ast.IntLiteral( yytext ); }
   | NEWLINE INDENT value DEDENT
     { $$ = $value; }
   ;
