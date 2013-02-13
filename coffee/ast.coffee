@@ -63,7 +63,13 @@ class Property
     setter = "set;"
     getter = indent getter
     setter = indent setter
-    "public Object #{v}" + "\n{\n#{getter}\n#{setter}\n}"
+    """
+    public Object #{v}
+    {
+    #{getter}
+    #{setter}
+    }
+    """
 
 class Method
   constructor: (identifier, parameters, body) ->
