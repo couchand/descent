@@ -15,3 +15,8 @@ m = new ast.Method mock('foobar'), [mock('a'), mock('b'), mock('c')], [mock('1')
 assertEqual m.compile(), 'public void foobar( a, b, c )\n{\n    1\n}'
 m = new ast.Method mock('foobar'), [], [mock('baz')]
 assertEqual m.compile(), 'public void foobar()\n{\n    baz\n}'
+
+p = new ast.Property mock('foobar'), mock('baz')
+assertEqual p.compile(), 'public Object foobar = baz'
+p = new ast.Property mock('foobar')
+assertEqual p.compile(), 'public Object foobar'
