@@ -20,17 +20,17 @@ validateClasses = (classes) ->
   assertEqual foobarProperties.length, 3
   assertEqual brooklynProperties.length, 1
 
-  assertEqual foobarProperties[0][0].name, 'foo', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[0][1].value, '1', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[0].variable.name, 'foo', 'the variable should be the left hand side of the assignment'
+  assertEqual foobarProperties[0].default_val.value, '1', 'the number should be the right hand side of the assignment'
 
-  assertEqual foobarProperties[1][0].name, 'bar', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[1][1].value, '2', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[1].variable.name, 'bar', 'the variable should be the left hand side of the assignment'
+  assertEqual foobarProperties[1].default_val.value, '2', 'the number should be the right hand side of the assignment'
 
-  assertEqual foobarProperties[2][0].name, 'baz', 'the variable should be the left hand side of the assignment'
-  assertEqual foobarProperties[2][1].value, '3', 'the number should be the right hand side of the assignment'
+  assertEqual foobarProperties[2].variable.name, 'baz', 'the variable should be the left hand side of the assignment'
+  assertEqual foobarProperties[2].default_val.value, '3', 'the number should be the right hand side of the assignment'
 
-  assertEqual brooklynProperties[0][0].name, 'city', 'the left hand side name should be parsed'
-  assertEqual brooklynProperties[0][1].value, '1', 'the right hand side name should be parsed'
+  assertEqual brooklynProperties[0].variable.name, 'city', 'the left hand side name should be parsed'
+  assertEqual brooklynProperties[0].default_val.value, '1', 'the right hand side name should be parsed'
 
 classes = p.parse 'Foobar\n  foo = 1\n  bar = 2\n  baz = 3\n\nBrooklyn\n  city = 1\n'
 validateClasses classes

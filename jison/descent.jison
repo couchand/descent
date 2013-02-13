@@ -73,7 +73,7 @@ method_body
 
 property
   : assignee '=' value
-    { $$ = [$assignee, $value]; }
+    { $$ = new ast.Property( $assignee, $value ); }
   ;
 
 assignee

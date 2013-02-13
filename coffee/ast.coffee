@@ -12,8 +12,8 @@ class ApexClass
     @inners = []
 
 class Property
-  constructor: (name, def) ->
-    @name = name
+  constructor: (variable, def) ->
+    @variable = variable
     @default_val = def
 
 class Method
