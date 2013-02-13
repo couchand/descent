@@ -86,4 +86,6 @@ value
     { $$ = ['var', yytext]; }
   | NUM
     { $$ = ['num', yytext]; }
+  | NEWLINE INDENT value DEDENT
+    { $$ = $value; }
   ;
