@@ -48,7 +48,7 @@ assignment
 
 assignee
   : VAR
-    { $$ = yytext; }
+    { $$ = ['var', yytext]; }
   ;
 
 value
