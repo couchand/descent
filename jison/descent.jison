@@ -50,12 +50,14 @@ method
 
 parameters
   :
+    { $$ = []; }
   | '(' param_list ')'
     { $$ = $param_list; }
   ;
 
 param_list
   :
+    { $$ = []; }
   | param
     { $$ = [$param]; }
   | param_list ',' param
