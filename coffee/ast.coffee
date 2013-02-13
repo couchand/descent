@@ -1,5 +1,13 @@
 # Abstract syntax tree nodes for descent
 
+tabchar = '    '
+
+indent = (txt, num=1) ->
+  tabs = ''
+  for i in [0...num]
+    tabs += tabchar
+  tabs + txt.replace /\n/g, '\n'+tabs
+
 class Body
   constructor: ->
     @classes = []
@@ -20,11 +28,12 @@ class ApexClass
   compile: ->
     members = ''
     for property in @properties
-      members += property.compile().replace /\n/g, "\n    "
-      members += '\n\n    '
+      members += property.compile()
+      members += '\n\n'
     for method in @methods
-      members += method.compile().replace /\n/g, "\n    "
-    "public class #{@name}\n{\n    #{members}\n}\n"
+      members += method.compile()
+    members = indent members
+    "public class #{@name}\n{\n#{members}\n}\n"
 
 class Property
   constructor: (variable, def) ->
@@ -33,9 +42,10 @@ class Property
   compile: ->
     v = @variable.compile()
     getter = if !@default_val? then 'get;' else "get\n{\n    if ( #{v} == null )\n    {\n        #{v} = #{@default_val.compile()};\n    }\n    return #{v};\n}"
-    getter = getter.replace /\n/g, '\n    '
     setter = "set;"
-    "public Object #{v}" + "\n{\n    #{getter}\n    #{setter}\n}"
+    getter = indent getter
+    setter = indent setter
+    "public Object #{v}" + "\n{\n#{getter}\n#{setter}\n}"
 
 class Method
   constructor: (identifier, parameters, body) ->
