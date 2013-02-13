@@ -33,7 +33,12 @@ class ApexClass
     for method in @methods
       members += method.compile()
     members = indent members
-    "public class #{@name}\n{\n#{members}\n}\n"
+    """
+    public class #{@name}
+    {
+    #{members}
+    }
+    """
 
 class Property
   constructor: (variable, def) ->
@@ -70,7 +75,12 @@ class Method
     params = (param.compile() for param in @parameters).join ', '
     params = ' ' + params + ' ' if params isnt ''
     bod = (line.compile() for line in @body).join ';\n    '
-    "public void #{name}(#{params})\n{\n    #{bod}\n}"
+    """
+    public void #{name}(#{params})
+    {
+        #{bod}
+    }
+    """
 
 class Variable
   constructor: (@name) ->
