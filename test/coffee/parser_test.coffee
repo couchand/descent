@@ -46,11 +46,10 @@ validateFoobar = (classes) ->
   assertEqual classes[0].length, 2, 'each class should have a name and a body'
   assertEqual classes[0][0], 'Foobar', 'the class name should be parsed'
   assertEqual classes[0][1].length, 1, 'the class has a single method'
-  assertEqual classes[0][1][0].length, 3, 'each method should have a name, parameters and a body'
-  assertEqual classes[0][1][0][0].name, 'has', 'the method name should be parsed'
-  assertEqual classes[0][1][0][1].length, 0, 'the method has no parameters'
-  assertEqual classes[0][1][0][2].length, 1, 'the method body has one line'
-  assertEqual classes[0][1][0][2][0].name, 'good', 'the declaration should be parsed'
+  assertEqual classes[0][1][0].identifier.name, 'has', 'the method name should be parsed'
+  assertEqual classes[0][1][0].parameters.length, 0, 'the method has no parameters'
+  assertEqual classes[0][1][0].body.length, 1, 'the method body has one line'
+  assertEqual classes[0][1][0].body[0].name, 'good', 'the declaration should be parsed'
 
 classes = p.parse 'Foobar\n  has: ->\n    good\n'
 validateFoobar classes

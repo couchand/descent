@@ -45,7 +45,7 @@ class_member
 
 method
   : assignee ':' parameters '->' method_body
-    { $$ = [$assignee, $parameters, $method_body]; }
+    { $$ = new ast.Method( $assignee, $parameters, $method_body ); }
   ;
 
 parameters

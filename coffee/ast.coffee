@@ -17,10 +17,10 @@ class Property
     @default_val = def
 
 class Method
-  constructor: (name, parameters) ->
-    @name = name
+  constructor: (identifier, parameters, body) ->
+    @identifier = identifier
     @parameters = parameters or []
-    @body = []
+    @body = body or []
 
 class Variable
   constructor: (@name) ->
