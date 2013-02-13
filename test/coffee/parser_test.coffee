@@ -60,4 +60,5 @@ classes = p.parse 'Foobar\n  has:->\n    good\n'
 classes = p.parse 'Foobar\n  has: -> good\n'
 classes = p.parse 'Foobar\n  has: () ->\n    good\n'
 classes = p.parse 'Foobar\n  has:()-> good\n'
+classes = p.parse 'Foobar\n  has      :                (          )                   ->\n    good\n'
 validateFoobar classes
