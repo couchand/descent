@@ -3,7 +3,7 @@ p = require '../../dst/parser.js'
 assertEqual = (actual, expected, msg) ->
   throw "Assertion failed.  Expected #{actual} to equal #{expected}: #{msg}." if actual isnt expected
 
-classes = p.parse 'Foobar\n  foo=1\n  bar=2\n  baz=3\n\nBrooklyn\n  city=1\n'
+classes = p.parse 'Foobar\n  foo = 1\n  bar = 2\n  baz = 3\n\nBrooklyn\n  city = 1\n'
 
 assertEqual classes.length, 2, 'there should be two classes'
 

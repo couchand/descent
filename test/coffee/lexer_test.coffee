@@ -11,8 +11,9 @@ lexer.rules = [
   new dl.Rule /^foo/, 'FOO'
   new dl.Rule /^bar/, 'BAR'
   new dl.Rule /^baz/, 'BAZ'
+  new dl.Rule /^ /
 ]
-lexer.setInput 'foofoobarbarfoo'
+lexer.setInput 'foo foo bar     barfoo'
 
 assertEqual lexer.lex(), 'FOO', '1'
 assertEqual lexer.lex(), 'FOO', '2'

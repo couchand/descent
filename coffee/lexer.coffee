@@ -24,14 +24,20 @@ class TabbedLexer
       @backlog = newline_tokens
       return @backlog.shift()
 
-    matches = @matchingRules()
-    throw "no match found at #{@cursor} for input:\n#{@input}" if matches.length is 0
-    longest = @longestOf matches
-    before = @cursor
-    @cursor += longest.match.length
+    longest
+    until longest?.rule?.token?
+      longest = @getMatch()
+      @cursor += longest.match.length
+
+    before = @cursor - longest.match.length
     @yytext = @input[before...@cursor]
     @yyleng = longest.match.length
     longest.rule.token
+
+  getMatch: ->
+    matches = @matchingRules()
+    throw "no match found at #{@cursor} for input:\n#{@input}" if matches.length is 0
+    @longestOf matches
 
   matchingRules: ->
     matches = for rule in @rules
