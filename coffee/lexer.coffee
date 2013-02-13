@@ -6,6 +6,8 @@ class TabbedLexer
   setInput: (@input) ->
     @cursor = 0
     @indent = 0
+    @row = 0
+    @col = 0
     @backlog = []
     @awaiting = []
 
@@ -19,8 +21,8 @@ class TabbedLexer
     return 'EOF' if @eof()
 
     newline_tokens = @checkForNewlines()
-    return newline_tokens[0] if newline_tokens.length is 1
     if newline_tokens.length
+      return newline_tokens[0] if newline_tokens.length is 1
       @backlog = newline_tokens
       return @backlog.shift()
 
@@ -28,15 +30,17 @@ class TabbedLexer
     until longest?.rule?.token?
       longest = @getMatch()
       @cursor += longest.match.length
+      @col += longest.match.length
 
     before = @cursor - longest.match.length
     @yytext = @input[before...@cursor]
     @yyleng = longest.match.length
+    @yylineno = @row
     longest.rule.token
 
   getMatch: ->
     matches = @matchingRules()
-    throw "no match found at #{@cursor} for input:\n#{@input}" if matches.length is 0
+    throw "no match found at row #{@row}, col #{@col}, cursor #{@cursor} for input:\n#{@input}" if matches.length is 0
     @longestOf matches
 
   matchingRules: ->
@@ -52,15 +56,23 @@ class TabbedLexer
     longest
 
   checkForNewlines: ->
-    return false unless @input[@cursor] is "\n"
+    return [] unless @input[@cursor] is "\n"
     tokens = ['NEWLINE']
     @cursor++
+    @row++
+    @col = 0
+
     blank_lines = @input[@cursor..].match new RegExp "^(#{@tabchar}*\n)+"
-    @cursor += blank_lines[0].length if blank_lines
+    if blank_lines
+      @cursor += blank_lines[0].length
+      newline_count = blank_lines[0].match /\n/g
+      @row += newline_count.length
+
     tab_chars = @input[@cursor..].match new RegExp "^#{@tabchar}+"
     tab_chars = if tab_chars then tab_chars[0].length else 0
-    throw "out of tab sync at #{@cursor} of input:\n#{@input}" if tab_chars % @tabstop
+    throw "out of tab sync at row #{@row}, col #{@col}, cursor #{@cursor} of input:\n#{@input}" if tab_chars % @tabstop
     new_indent = tab_chars / @tabstop
+
     while new_indent > @indent
       tokens.push 'INDENT'
       @awaiting.push 'DEDENT'
@@ -69,7 +81,9 @@ class TabbedLexer
       tokens.unshift 'DEDENT'
       @awaiting.shift 'DEDENT'
       --@indent
+
     @cursor += tab_chars
+    @col += tab_chars
     tokens
 
 class Rule
