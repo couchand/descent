@@ -110,6 +110,11 @@ class IntLiteral
   constructor: (@value) ->
   compile: -> @value
 
+class EmbeddedApex
+  constructor: (text) ->
+    @value = text.slice 1, text.length-1
+  compile: -> @value
+
 LEVEL =
   global: 0
   public: 1
@@ -143,6 +148,7 @@ module.exports = {
   Method: Method
   Variable: Variable
   IntLiteral: IntLiteral
+  EmbeddedApex: EmbeddedApex
   GLOBAL: GLOBAL
   PUBLIC: PUBLIC
   READABLE: READABLE

@@ -76,3 +76,12 @@ classes = p.parse 'Foobar\n  has: ( baz, bam ) ->\n    good\n'
 validateFoobar classes, ['baz', 'bam']
 classes = p.parse 'Foobar\n  has: (baz,bam) ->\n    good\n'
 validateFoobar classes, ['baz', 'bam']
+
+classes = p.parse 'Foobar\n  hasEmbedded: ->\n    `return myEmbeddedApex();`\n'
+assertEqual classes.length, 1, 'just the one class'
+assertEqual classes[0].name, 'Foobar', 'the class name should be parsed'
+assertEqual classes[0].methods.length, 1, 'the class method should be parsed'
+assertEqual classes[0].methods[0].identifier.name, 'hasEmbedded', 'the method name should be parsed'
+assertEqual classes[0].methods[0].parameters.length, 0, 'the parameters should be parsed'
+assertEqual classes[0].methods[0].body.length, 1, 'the body should be parsed'
+assertEqual classes[0].methods[0].body[0].value, 'return myEmbeddedApex();', 'the embedded apex should be parsed'

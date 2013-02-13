@@ -103,6 +103,8 @@ property
 assignee
   : VAR
     { $$ = new ast.Variable( yytext ); }
+  | embedded_apex
+    { $$ = $embedded_apex; }
   ;
 
 value
@@ -112,4 +114,9 @@ value
     { $$ = new ast.IntLiteral( yytext ); }
   | NEWLINE INDENT value DEDENT
     { $$ = $value; }
+  ;
+
+embedded_apex
+  : APEX
+    { $$ = new ast.EmbeddedApex( yytext ); }
   ;
