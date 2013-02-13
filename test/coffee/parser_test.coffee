@@ -42,6 +42,10 @@ validateClasses = (classes) ->
 
 classes = p.parse 'Foobar\n  foo = 1\n  bar = 2\n  baz = 3\n\nBrooklyn\n  city = 1\n'
 validateClasses classes
+classes = p.parse 'Foobar\n  foo=1\n  bar        =     2\n  baz=    3\n     \n\n     \nBrooklyn\n  city= 1\n'
+validateClasses classes
+classes = p.parse 'Foobar\n  foo = 1\n\n  bar = 2\n\n  baz = 3\nBrooklyn\n\n  city = 1\n'
+validateClasses classes
 
 validateFoobar = (classes) ->
   assertEqual classes.length, 1, 'just the one class'
