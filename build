@@ -56,10 +56,10 @@ if [ "$BUILD" == 1 ] ; then
   jison -o $BUILD_DIR/parser.js jison/descent.jison
 
   echo "patching parser"
-  echo "> patch $BUILD_DIR/parser.js < loadLexer.patch"
-  patch $BUILD_DIR/parser.js < loadLexer.patch
-  echo "> patch $BUILD_DIR/parser.js < cliCompile.patch"
-  patch $BUILD_DIR/parser.js < cliCompile.patch
+  echo "> patch $BUILD_DIR/parser.js < patches/loadLexer.patch"
+  patch $BUILD_DIR/parser.js < patches/loadLexer.patch
+  echo "> patch $BUILD_DIR/parser.js < patches/cliCompile.patch"
+  patch $BUILD_DIR/parser.js < patches/cliCompile.patch
 fi
 
 if [ "$TEST" == 1 ] ; then
