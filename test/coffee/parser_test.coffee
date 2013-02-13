@@ -57,9 +57,14 @@ validateFoobar = (classes) ->
   assertEqual classes[0][1][0][2][0][1], 'good', 'the declaration should be parsed'
 
 classes = p.parse 'Foobar\n  has: ->\n    good\n'
+validateFoobar classes
 classes = p.parse 'Foobar\n  has:->\n    good\n'
+validateFoobar classes
 classes = p.parse 'Foobar\n  has: -> good\n'
+validateFoobar classes
 classes = p.parse 'Foobar\n  has: () ->\n    good\n'
+validateFoobar classes
 classes = p.parse 'Foobar\n  has:()-> good\n'
+validateFoobar classes
 classes = p.parse 'Foobar\n  has      :                (          )                   ->\n    good\n'
 validateFoobar classes
