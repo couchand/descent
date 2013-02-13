@@ -66,6 +66,12 @@ class Property
                }
                """
     setter = "set;"
+
+    get_viz = @visibility.compile { context: 'get' }
+    getter = get_viz + ' ' + getter if get_viz
+    set_viz = @visibility.compile { context: 'set' }
+    setter = set_viz + ' ' + setter if set_viz
+
     getter = indent getter
     setter = indent setter
     """
@@ -104,13 +110,30 @@ class IntLiteral
   constructor: (@value) ->
   compile: -> @value
 
+LEVEL =
+  global: 0
+  public: 1
+  private: 2
+
 class Visibility
-  constructor: (@value) ->
-  compile: -> @value
+  constructor: (@read, @write) ->
+    @total = @read
+    @write ?= @read
+  compile: (opts) ->
+    switch opts?.context
+      when 'get'
+        if LEVEL[@read] > LEVEL[@total]
+          return @read
+        return ''
+      when 'set'
+        if LEVEL[@write] > LEVEL[@total]
+          return @write
+        return ''
+    return @total
 
 GLOBAL = new Visibility 'global'
 PUBLIC = new Visibility 'public'
-READABLE = new Visibility 'not_supported'
+READABLE = new Visibility 'public', 'private'
 PRIVATE = new Visibility 'private'
 
 module.exports = {

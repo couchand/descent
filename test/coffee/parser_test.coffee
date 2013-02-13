@@ -41,6 +41,8 @@ classes = p.parse 'Foobar\n  foo=\n\n    1\n  bar   =\n\n\n    2\n\n  baz     =\
 validateClasses classes
 classes = p.parse 'Foobar\n  foo = 1\n  bar = 2\n  baz\n\nBrooklyn\n  city = 1\n'
 validateClasses classes, false
+classes = p.parse 'Foobar\n  public foo = 1\n  private bar = 2\n  readable baz = 3\n\nglobal Brooklyn\n  global city = 1\n'
+validateClasses classes
 
 validateFoobar = (classes, params=[]) ->
   assertEqual classes.length, 1, 'just the one class'
@@ -53,15 +55,15 @@ validateFoobar = (classes, params=[]) ->
 
 classes = p.parse 'Foobar\n  has: ->\n    good\n'
 validateFoobar classes
-classes = p.parse 'Foobar\n  has:->\n    good\n'
+classes = p.parse 'public Foobar\n  has:->\n    good\n'
 validateFoobar classes
-classes = p.parse 'Foobar\n  has: -> good\n'
+classes = p.parse 'global Foobar\n  has: -> good\n'
 validateFoobar classes
-classes = p.parse 'Foobar\n  has: () ->\n    good\n'
+classes = p.parse 'private Foobar\n  has: () ->\n    good\n'
 validateFoobar classes
-classes = p.parse 'Foobar\n  has:()-> good\n'
+classes = p.parse 'public Foobar\n  has:()-> good\n'
 validateFoobar classes
-classes = p.parse 'Foobar\n  has      :                (          )                   ->\n    good\n'
+classes = p.parse 'global Foobar\n  has      :                (          )                   ->\n    good\n'
 validateFoobar classes
 
 classes = p.parse 'Foobar\n  has: (baz) ->\n    good\n'
