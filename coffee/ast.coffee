@@ -3,10 +3,10 @@
 tabchar = '    '
 
 indent = (txt, num=1) ->
-  tabs = ''
+  tabs = '\n'
   for i in [0...num]
     tabs += tabchar
-  tabs + txt.replace /\n/g, '\n'+tabs
+  txt.replace /\n/g, tabs
 
 class Body
   constructor: ->
@@ -36,7 +36,7 @@ class ApexClass
     """
     public class #{@name}
     {
-    #{members}
+        #{members}
     }
     """
 
@@ -66,8 +66,8 @@ class Property
     """
     public Object #{v}
     {
-    #{getter}
-    #{setter}
+        #{getter}
+        #{setter}
     }
     """
 
