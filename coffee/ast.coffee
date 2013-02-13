@@ -110,6 +110,7 @@ class Visibility
 
 GLOBAL = new Visibility 'global'
 PUBLIC = new Visibility 'public'
+READABLE = new Visibility 'not_supported'
 PRIVATE = new Visibility 'private'
 
 module.exports = {
@@ -121,5 +122,6 @@ module.exports = {
   IntLiteral: IntLiteral
   GLOBAL: GLOBAL
   PUBLIC: PUBLIC
+  READABLE: READABLE
   PRIVATE: PRIVATE
 }
