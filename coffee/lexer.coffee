@@ -40,7 +40,7 @@ class TabbedLexer
 
   getMatch: ->
     matches = @matchingRules()
-    throw "no match found at row #{@row}, col #{@col}, cursor #{@cursor} for input:\n#{@input}" if matches.length is 0
+    @lexingError "no match found" if matches.length is 0
     @longestOf matches
 
   matchingRules: ->
@@ -70,7 +70,7 @@ class TabbedLexer
 
     tab_chars = @input[@cursor..].match new RegExp "^#{@tabchar}+"
     tab_chars = if tab_chars then tab_chars[0].length else 0
-    throw "out of tab sync at row #{@row}, col #{@col}, cursor #{@cursor} of input:\n#{@input}" if tab_chars % @tabstop
+    @lexingError "out of tab sync" if tab_chars % @tabstop
     new_indent = tab_chars / @tabstop
 
     while new_indent > @indent
@@ -85,6 +85,19 @@ class TabbedLexer
     @cursor += tab_chars
     @col += tab_chars
     tokens
+
+  lexingError: (msg) ->
+    inp = @pointTo @row, @col, @input
+    throw "Lexing Error: #{msg} at row #{@row}, col #{@col}, cursor #{@cursor} of input:\n#{inp}"
+
+  pointTo: (row, col, input) ->
+    lines = input.split /\n/
+    pointer = ''
+    for i in [0...col]
+      pointer += '-'
+    pointer += '^'
+    lines.splice row+1, 0, pointer
+    lines.join '\n'
 
 class Rule
   constructor: (@pattern, @token) ->
