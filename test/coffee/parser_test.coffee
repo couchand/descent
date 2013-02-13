@@ -39,12 +39,12 @@ validateClasses classes
 classes = p.parse 'Foobar\n  foo=\n\n    1\n  bar   =\n\n\n    2\n\n  baz     =\n    3\nBrooklyn\n  city=\n    1\n'
 validateClasses classes
 
-validateFoobar = (classes) ->
+validateFoobar = (classes, params=[]) ->
   assertEqual classes.length, 1, 'just the one class'
   assertEqual classes[0].name, 'Foobar', 'the class name should be parsed'
   assertEqual classes[0].methods.length, 1, 'the class has a single method'
   assertEqual classes[0].methods[0].identifier.name, 'has', 'the method name should be parsed'
-  assertEqual classes[0].methods[0].parameters.length, 0, 'the method has no parameters'
+  assertEqual classes[0].methods[0].parameters.length, params.length, 'the parameters should be parsed'
   assertEqual classes[0].methods[0].body.length, 1, 'the method body has one line'
   assertEqual classes[0].methods[0].body[0].name, 'good', 'the declaration should be parsed'
 
@@ -60,3 +60,14 @@ classes = p.parse 'Foobar\n  has:()-> good\n'
 validateFoobar classes
 classes = p.parse 'Foobar\n  has      :                (          )                   ->\n    good\n'
 validateFoobar classes
+
+classes = p.parse 'Foobar\n  has: (baz) ->\n    good\n'
+validateFoobar classes, ['baz']
+classes = p.parse 'Foobar\n  has: ( baz ) ->\n    good\n'
+validateFoobar classes, ['baz']
+classes = p.parse 'Foobar\n  has: (     baz    ) ->\n    good\n'
+validateFoobar classes, ['baz']
+classes = p.parse 'Foobar\n  has: ( baz, bam ) ->\n    good\n'
+validateFoobar classes, ['baz', 'bam']
+classes = p.parse 'Foobar\n  has: (baz,bam) ->\n    good\n'
+validateFoobar classes, ['baz', 'bam']

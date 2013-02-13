@@ -64,6 +64,11 @@ param_list
     { $$ = $param_list; $$.push( $param ); }
   ;
 
+param
+  : assignee
+    { $$ = $assignee; }
+  ;
+
 method_body
   : assignee
     { $$ = [$assignee]; }
