@@ -1,4 +1,4 @@
-class DescentLexer
+class TabbedLexer
   constructor: (@tabstop = 2) ->
     @rules = []
     @tabchar = ' '
@@ -72,12 +72,6 @@ class Rule
     match = part.match @pattern
     if match then match[0] else false
 
-basicLexer = new DescentLexer()
-basicLexer.rules.push new Rule /^[a-zA-Z]+/, 'VAR'
-basicLexer.rules.push new Rule /^[0-9]+/, 'NUM'
-basicLexer.rules.push new Rule /^=/, '='
-
 module.exports =
-  DescentLexer: DescentLexer
+  TabbedLexer: TabbedLexer
   Rule: Rule
-  basicLexer: basicLexer

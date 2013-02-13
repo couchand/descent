@@ -1,8 +1,8 @@
 1a2,3
-> var lexer = require('./lexer.js');
+> var lexer = require('./dlex.js');
 > 
 4a7
-> lexer: lexer.basicLexer,
+> lexer: lexer,
 170c173
 < }
 \ No newline at end of file

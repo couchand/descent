@@ -3,10 +3,10 @@ dl = require '../../dst/lexer.js'
 assertEqual = (actual, expected, msg) ->
   throw "Assertion failed.  Expected #{actual} to equal #{expected}: #{msg}." if actual isnt expected
 
-#describe 'DescentLexer', ->
+#describe 'TabbedLexer', ->
 #  describe 'lex', ->
 #    it 'lexes', ->
-lexer = new dl.DescentLexer()
+lexer = new dl.TabbedLexer()
 lexer.rules = [
   new dl.Rule /^foo/, 'FOO'
   new dl.Rule /^bar/, 'BAR'
@@ -50,7 +50,7 @@ assertEqual lexer.lex(), 'EOF'
 
 
 
-l = new dl.DescentLexer
+l = new dl.TabbedLexer()
 
 l.rules.push new dl.Rule /^[a-zA-Z][a-zA-Z0-9_]+/, 'IDENTIFIER'
 l.rules.push new dl.Rule /^( |\t)/, 'WHITESPACE'
