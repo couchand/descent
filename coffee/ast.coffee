@@ -26,6 +26,7 @@ class ApexClass
       @methods.push member if member instanceof Method
 
   compile: ->
+    visibility = 'public'
     members = ''
     for property in @properties
       members += property.compile()
@@ -34,7 +35,7 @@ class ApexClass
       members += method.compile()
     members = indent members
     """
-    public class #{@name}
+    #{visibility} class #{@name}
     {
         #{members}
     }
@@ -45,6 +46,8 @@ class Property
     @variable = variable
     @default_val = def
   compile: ->
+    visibility = 'public'
+    type = 'Object'
     v = @variable.compile()
     getter
     if !@default_val?
@@ -64,7 +67,7 @@ class Property
     getter = indent getter
     setter = indent setter
     """
-    public Object #{v}
+    #{visibility} #{type} #{v}
     {
         #{getter}
         #{setter}
@@ -77,12 +80,14 @@ class Method
     @parameters = parameters or []
     @body = body or []
   compile: ->
+    visibility = 'public'
+    return_type = 'void'
     name = @identifier.name
     params = (param.compile() for param in @parameters).join ', '
     params = ' ' + params + ' ' if params isnt ''
     bod = (line.compile() for line in @body).join ';\n    '
     """
-    public void #{name}(#{params})
+    #{visibility} #{return_type} #{name}(#{params})
     {
         #{bod}
     }
