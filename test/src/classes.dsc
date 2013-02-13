@@ -15,7 +15,7 @@ MyClass
   ::classProperty = 'bar'
   ::CLASS_CONSTANT = 3.141592653
 
-  instanceMethod ->
+  instanceMethod: ->
     classMethod instanceProperty
-  ::classMethod (str) ->
+  ::classMethod: (str) ->
     str + classProperty

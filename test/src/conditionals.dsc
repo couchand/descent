@@ -1,11 +1,11 @@
 Postfix
   greatlyImproved = 'sunshine and rainbows'
 
-  singing -> yes
-  raining -> no
-  goForPicnic -> print 'lovely day'
+  singing: -> yes
+  raining: -> no
+  goForPicnic: -> print 'lovely day'
 
-  check ->
+  check: ->
     mood = greatlyImproved if singing
     goForPicnic() unless raining
 
@@ -14,11 +14,11 @@ Blocks
   knowsIt = yes
   grounded = no
 
-  clapHands -> print '*CLAP*'
-  chaChaCha -> print 'cha-cha-cha'
-  playHookey -> print 'going to arcade'
+  clapHands: -> print '*CLAP*'
+  chaChaCha: -> print 'cha-cha-cha'
+  playHookey: -> print 'going to arcade'
 
-  check ->
+  check: ->
     if happy and knowsIt
       clapHands()
       chaChaCha()
@@ -31,14 +31,14 @@ Assignment
   sue = 'hot'
   jill = 'not'
 
-  friday -> no
-  check ->
+  friday: -> no
+  check: ->
     date = if friday then sue else jill
 
 SwitchGenerate
   favoriteLanguage = 'Sass'
 
-  check ->
+  check: ->
     switch favoriteLanguage
     when 'Ruby'
       print 'Ruby is great'

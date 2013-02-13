@@ -1,5 +1,5 @@
 Aliases
-  in ->
+  in: ->
     cats = { 'Igor', 'Peggy Sue' }
     if someCat in cats
       print 'my cat'

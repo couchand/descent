@@ -4,7 +4,7 @@ Exist
   str yeti
   lottery = Lottery
 
-  basicCheck ->
+  basicCheck: ->
     solipsism = true if mind? and not world?
 
     speed = 0
@@ -12,11 +12,11 @@ Exist
 
     footprints = yeti ? "bear"
 
-  accessorVariant ->
+  accessorVariant: ->
     zip = lottery.drawWinner()?.address?.zipcode
 
   Lottery
-    drawWinner ->
+    drawWinner: ->
       Person
 
   Person

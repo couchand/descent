@@ -1,4 +1,4 @@
 ChainedComparison
   cholesterol = 127
-  healthy ->
+  healthy: ->
     200 > cholesterol > 60

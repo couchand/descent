@@ -1,11 +1,11 @@
 Basic
-  eat (food) ->
+  eat: (food) ->
     print "eating #{food}"
 
-  menu (num, item) ->
+  menu: (num, item) ->
     print "#{num}.) #{item}"
 
-  doStuff ->
+  doStuff: ->
     eat food for food in ['toast', 'cheese', 'wine']
 
     courses = ['greens', 'caviar', 'truffles', 'roast', 'cake']
@@ -15,10 +15,10 @@ Basic
     eat food for food in foods when food isnt 'chocolate'
 
 Comprehensions
-  doStuff ->
+  doStuff: ->
     countdown = (num for num in [10..1])
 
-  maps ->
+  maps: ->
     yearsOld = max: 10, ida: 9, tim: 11
 
     ages = for child, age of yearsOld
@@ -29,20 +29,20 @@ WhileLoop
   supply = 5
   demand = 4
 
-  buy -> --supply
-  sell -> --demand
+  buy: -> --supply
+  sell: -> --demand
 
-  econ101 ->
+  econ101: ->
     if this.studyingEconomics
       buy()  while supply > demand
       sell() until supply > demand
 
-  nurseryRhyme ->
+  nurseryRhyme: ->
     num = 6
     lyrics = while num -= 1
       "#{num} little monkeys, jumping on the bed.
         One fell out and bumped his head."
 
-  purgatory ->
+  purgatory: ->
     loop
       econ101()

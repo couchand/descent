@@ -1,11 +1,11 @@
 Aliases
-  tautology ->
+  tautology: ->
     if 1 is 1 and 1 isnt 2
       if 1 is 2 or 1 isnt 2
         if on is true and yes is true
           if off is false and no is false
             print 'whew'
-  confusing ->
+  confusing: ->
     unless not off then print 'how did i get here?'
     print 'same question' unless not no
 
@@ -18,15 +18,15 @@ Example
   car = Car
   limit = 60
 
-  launch ->
-  letTheWildRumpusBegin ->
-  accelerate ->
-  pick -> 42
+  launch: ->
+  letTheWildRumpusBegin: ->
+  accelerate: ->
+  pick: -> 42
 
-  useful (str name) ->
+  useful: (str name) ->
     @name = name
 
-  doIt ->
+  doIt: ->
     launch() if ignition is on
     volume = 10 if band isnt 'SpinalTap'
     letTheWildRumpusBegin() unless answer is no
@@ -36,5 +36,5 @@ Example
 
   SpinalTap
   Car
-    ->
+    :->
       @speed = 15
