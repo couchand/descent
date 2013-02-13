@@ -37,11 +37,39 @@ class_members
   ;
 
 class_member
-  : assignment
-    { $$ = ['Assignment', $assignment]; }
+  : property
+    { $$ = $property; }
+  | method
+    { $$ = $method; }
   ;
 
-assignment
+method
+  : assignee ':' parameters '->' method_body
+    { $$ = [$assignee, $parameters, $method_body]; }
+  ;
+
+parameters
+  :
+  | '(' param_list ')'
+    { $$ = $param_list; }
+  ;
+
+param_list
+  :
+  | param
+    { $$ = [$param]; }
+  | param_list ',' param
+    { $$ = $param_list; $$.push( $param ); }
+  ;
+
+method_body
+  : assignee
+    { $$ = [$assignee]; }
+  | NEWLINE INDENT assignee DEDENT
+    { $$ = [$assignee]; }
+  ;
+
+property
   : assignee '=' value
     { $$ = [$assignee, $value]; }
   ;
