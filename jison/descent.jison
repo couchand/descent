@@ -78,12 +78,12 @@ property
 
 assignee
   : VAR
-    { $$ = ['var', yytext]; }
+    { $$ = new ast.Variable( yytext ); }
   ;
 
 value
   : VAR
-    { $$ = ['var', yytext]; }
+    { $$ = new ast.Variable( yytext ); }
   | NUM
     { $$ = ['num', yytext]; }
   | NEWLINE INDENT value DEDENT

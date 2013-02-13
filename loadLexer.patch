@@ -1,10 +1,6 @@
-1a2,3
+1a2,4
 > var lexer = require('./dlex.js');
+> var ast = require('./ast.js');
 > 
-4a7
+4a8
 > lexer: lexer,
-170c173
-< }
-\ No newline at end of file
----
-> }
