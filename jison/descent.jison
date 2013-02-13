@@ -16,7 +16,7 @@ class_list
 
 cls
   : class_name NEWLINE class_body
-    { $$ = [$class_name, $class_body]; }
+    { $$ = new ast.ApexClass( $class_name, $class_body ); }
   ;
 
 class_name

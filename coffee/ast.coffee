@@ -5,11 +5,17 @@ class Body
     @classes = []
 
 class ApexClass
-  constructor: (name) ->
+  constructor: (name, body) ->
     @name = name
     @properties = []
     @methods = []
     @inners = []
+    @sortMembers body
+
+  sortMembers: (members) ->
+    for member in members
+      @properties.push member if member instanceof Property
+      @methods.push member if member instanceof Method
 
 class Property
   constructor: (variable, def) ->

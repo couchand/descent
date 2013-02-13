@@ -9,13 +9,11 @@ validateClasses = (classes) ->
   foobar = classes[0]
   brooklyn = classes[1]
 
-  assertEqual foobar.length, 2, 'each class should have a name and a body'
-  assertEqual foobar[0], 'Foobar', 'the class name should be parsed'
-  assertEqual brooklyn.length, 2, 'each class should have a name and a body'
-  assertEqual brooklyn[0], 'Brooklyn', 'the class name should be parsed'
+  assertEqual foobar.name, 'Foobar', 'the class name should be parsed'
+  assertEqual brooklyn.name, 'Brooklyn', 'the class name should be parsed'
 
-  foobarProperties = foobar[1]
-  brooklynProperties = brooklyn[1]
+  foobarProperties = foobar.properties
+  brooklynProperties = brooklyn.properties
 
   assertEqual foobarProperties.length, 3
   assertEqual brooklynProperties.length, 1
@@ -43,13 +41,12 @@ validateClasses classes
 
 validateFoobar = (classes) ->
   assertEqual classes.length, 1, 'just the one class'
-  assertEqual classes[0].length, 2, 'each class should have a name and a body'
-  assertEqual classes[0][0], 'Foobar', 'the class name should be parsed'
-  assertEqual classes[0][1].length, 1, 'the class has a single method'
-  assertEqual classes[0][1][0].identifier.name, 'has', 'the method name should be parsed'
-  assertEqual classes[0][1][0].parameters.length, 0, 'the method has no parameters'
-  assertEqual classes[0][1][0].body.length, 1, 'the method body has one line'
-  assertEqual classes[0][1][0].body[0].name, 'good', 'the declaration should be parsed'
+  assertEqual classes[0].name, 'Foobar', 'the class name should be parsed'
+  assertEqual classes[0].methods.length, 1, 'the class has a single method'
+  assertEqual classes[0].methods[0].identifier.name, 'has', 'the method name should be parsed'
+  assertEqual classes[0].methods[0].parameters.length, 0, 'the method has no parameters'
+  assertEqual classes[0].methods[0].body.length, 1, 'the method body has one line'
+  assertEqual classes[0].methods[0].body[0].name, 'good', 'the declaration should be parsed'
 
 classes = p.parse 'Foobar\n  has: ->\n    good\n'
 validateFoobar classes
