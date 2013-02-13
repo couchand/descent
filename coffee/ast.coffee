@@ -15,6 +15,7 @@ class Body
 class ApexClass
   constructor: (name, body) ->
     @name = name
+    @visibility = PUBLIC
     @properties = []
     @methods = []
     @inners = []
@@ -26,7 +27,7 @@ class ApexClass
       @methods.push member if member instanceof Method
 
   compile: ->
-    visibility = 'public'
+    visibility = @visibility.compile()
     members = ''
     for property in @properties
       members += property.compile()
@@ -44,9 +45,10 @@ class ApexClass
 class Property
   constructor: (variable, def) ->
     @variable = variable
+    @visibility = PUBLIC
     @default_val = def
   compile: ->
-    visibility = 'public'
+    visibility = @visibility.compile()
     type = 'Object'
     v = @variable.compile()
     getter
@@ -77,10 +79,11 @@ class Property
 class Method
   constructor: (identifier, parameters, body) ->
     @identifier = identifier
+    @visibility = PUBLIC
     @parameters = parameters or []
     @body = body or []
   compile: ->
-    visibility = 'public'
+    visibility = @visibility.compile()
     return_type = 'void'
     name = @identifier.name
     params = (param.compile() for param in @parameters).join ', '
@@ -101,6 +104,14 @@ class IntLiteral
   constructor: (@value) ->
   compile: -> @value
 
+class Visibility
+  constructor: (@value) ->
+  compile: -> @value
+
+GLOBAL = new Visibility 'global'
+PUBLIC = new Visibility 'public'
+PRIVATE = new Visibility 'private'
+
 module.exports = {
   Body: Body
   ApexClass: ApexClass
@@ -108,4 +119,7 @@ module.exports = {
   Method: Method
   Variable: Variable
   IntLiteral: IntLiteral
+  GLOBAL: GLOBAL
+  PUBLIC: PUBLIC
+  PRIVATE: PRIVATE
 }
