@@ -58,6 +58,8 @@ if [ "$BUILD" == 1 ] ; then
   echo "patching parser"
   echo "> patch $BUILD_DIR/parser.js < loadLexer.patch"
   patch $BUILD_DIR/parser.js < loadLexer.patch
+  echo "> patch $BUILD_DIR/parser.js < cliCompile.patch"
+  patch $BUILD_DIR/parser.js < cliCompile.patch
 fi
 
 if [ "$TEST" == 1 ] ; then

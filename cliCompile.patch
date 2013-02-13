@@ -1,0 +1,8 @@
+187c187,191
+<     return exports.parser.parse(source);
+---
+>     var tree = exports.parser.parse(source);
+>     for ( var i = 0; i < tree.length; i++ ) {
+>       console.log( tree[i].compile() );
+>     }
+>     return tree;
