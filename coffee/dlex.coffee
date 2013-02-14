@@ -20,4 +20,4 @@ basicLexer.rules.push new tl.Rule /^\)/, ')'
 basicLexer.rules.push new tl.Rule /^`[^`]*`/, 'APEX'
 basicLexer.rules.push new tl.Rule /^ /
 
-module.exports = basicLexer;
+module.exports = basicLexer
