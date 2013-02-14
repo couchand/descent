@@ -48,7 +48,7 @@ validateFoobar = (classes, params=[]) ->
   assertEqual classes.length, 1, 'just the one class'
   assertEqual classes[0].name, 'Foobar', 'the class name should be parsed'
   assertEqual classes[0].methods.length, 1, 'the class has a single method'
-  assertEqual classes[0].methods[0].identifier, 'has', 'the method name should be parsed'
+  assertEqual classes[0].methods[0].name, 'has', 'the method name should be parsed'
   assertEqual classes[0].methods[0].parameters.length, params.length, 'the parameters should be parsed'
   assertEqual classes[0].methods[0].body.length, 1, 'the method body has one line'
   assertEqual classes[0].methods[0].body[0].name, 'good', 'the declaration should be parsed'

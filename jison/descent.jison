@@ -58,7 +58,9 @@ class_member
 
 method
   : METHOD method_name ':' parameters '->' method_body
-    { $$ = new ast.Method( $method_name, $parameters, $method_body ); }
+    { $$ = new ast.Method( $method_name, null, $parameters, $method_body ); }
+  | METHOD visibility method_name ':' parameters '->' method_body
+    { $$ = new ast.Method( $method_name, $visibility, $parameters, $method_body ); }
   ;
 
 method_name

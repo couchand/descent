@@ -83,20 +83,19 @@ class Property
     """
 
 class Method
-  constructor: (identifier, parameters, body) ->
-    @identifier = identifier
-    @visibility = PUBLIC
+  constructor: (name, visibility, parameters, body) ->
+    @name = name
+    @visibility = visibility or PUBLIC
     @parameters = parameters or []
     @body = body or []
   compile: ->
     visibility = @visibility.compile()
     return_type = 'void'
-    name = @identifier.name
     params = (param.compile() for param in @parameters).join ', '
     params = ' ' + params + ' ' if params isnt ''
     bod = (line.compile() for line in @body).join ';\n    '
     """
-    #{visibility} #{return_type} #{name}(#{params})
+    #{visibility} #{return_type} #{@name}(#{params})
     {
         #{bod}
     }
