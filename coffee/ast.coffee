@@ -137,11 +137,9 @@ class VisibilityType
 
 class Visibility
   constructor: (type) ->
-    console.log type.total
     @types = [type]
   add: (type) ->
-    console.log type.total
-    @types.push type
+    @types.push type unless @types.indexOf type
   hasFinal: ->
     for type in @types
       return true if type is FINAL
