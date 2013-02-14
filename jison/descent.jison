@@ -57,8 +57,13 @@ class_member
   ;
 
 method
-  : assignee ':' parameters '->' method_body
-    { $$ = new ast.Method( $assignee, $parameters, $method_body ); }
+  : METHOD method_name ':' parameters '->' method_body
+    { $$ = new ast.Method( $method_name, $parameters, $method_body ); }
+  ;
+
+method_name
+  : VAR
+    { $$ = yytext; }
   ;
 
 parameters

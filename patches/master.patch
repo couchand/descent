@@ -1,0 +1,23 @@
+1a2,6
+> /* patched by patch on behalf of couch */
+> var rewriter = require('./drite.js');
+> var lexer = require('./dlex.js');
+> var ast = require('./ast.js');
+> 
+4a10,11
+> lexer: lexer,
+> rewriter: rewriter,
+87c94,96
+<     this.lexer.setInput(input);
+---
+> 
+>     this.lexer.setInput( this.rewriter.rewrite( input ) );
+> 
+203c212,216
+<     return exports.parser.parse(source);
+---
+>     var tree = exports.parser.parse(source);
+>     for ( var i = 0; i < tree.length; i++ ) {
+>       console.log( tree[i].compile() );
+>     }
+>     return tree;
