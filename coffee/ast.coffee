@@ -28,17 +28,14 @@ class ApexClass
 
   compile: ->
     visibility = @visibility.compile()
-    members = ''
-    for property in @properties
-      members += property.compile()
-      members += '\n\n'
-    for method in @methods
-      members += method.compile()
-    members = indent members
+    props = indent (property.compile() for property in @properties).join '\n\n'
+    meths = indent (method.compile() for method in @methods).join '\n\n'
     """
     #{visibility} class #{@name}
     {
-        #{members}
+        #{props}
+
+        #{meths}
     }
     """
 
