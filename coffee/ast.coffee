@@ -51,6 +51,11 @@ class Property
     visibility = @visibility.compile()
     type = 'Object'
     v = @variable.compile()
+    if @visibility.hasFinal and @visibility.hasFinal()
+      return """
+             #{visibility} #{type} #{v} = #{@default_val.compile()};
+             """
+
     getter
     if !@default_val?
        getter = 'get;'
@@ -114,7 +119,7 @@ LEVEL =
   public: 1
   private: 2
 
-class Visibility
+class VisibilityType
   constructor: (@read, @write) ->
     @total = @read
     @write ?= @read
@@ -130,10 +135,26 @@ class Visibility
         return ''
     return @total
 
-GLOBAL = new Visibility 'global'
-PUBLIC = new Visibility 'public'
-READABLE = new Visibility 'public', 'private'
-PRIVATE = new Visibility 'private'
+class Visibility
+  constructor: (type) ->
+    console.log type.total
+    @types = [type]
+  add: (type) ->
+    console.log type.total
+    @types.push type
+  hasFinal: ->
+    for type in @types
+      return true if type is FINAL
+    return false
+  compile: (opts) ->
+    (type.compile opts for type in @types).join ' '
+
+GLOBAL = new VisibilityType 'global'
+PUBLIC = new VisibilityType 'public'
+READABLE = new VisibilityType 'public', 'private'
+PRIVATE = new VisibilityType 'private'
+STATIC = new VisibilityType 'static'
+FINAL = new VisibilityType 'final'
 
 module.exports = {
   Body: Body
@@ -142,8 +163,11 @@ module.exports = {
   Method: Method
   Variable: Variable
   IntLiteral: IntLiteral
+  Visibility: Visibility
   GLOBAL: GLOBAL
   PUBLIC: PUBLIC
   READABLE: READABLE
   PRIVATE: PRIVATE
+  STATIC: STATIC
+  FINAL: FINAL
 }

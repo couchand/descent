@@ -22,6 +22,13 @@ cls
   ;
 
 visibility
+  : visibility_keyword
+    { $$ = new ast.Visibility( $visibility_keyword ); }
+  | visibility visibility_keyword
+    { $$ = $visibility; $$.add( $visibility_keyword ); }
+  ;
+
+visibility_keyword
   : GLOBAL
     { $$ = ast.GLOBAL; }
   | PUBLIC
@@ -30,6 +37,10 @@ visibility
     { $$ = ast.READABLE; }
   | PRIVATE
     { $$ = ast.PRIVATE; }
+  | STATIC
+    { $$ = ast.STATIC; }
+  | FINAL
+    { $$ = ast.FINAL; }
   ;
 
 class_name
