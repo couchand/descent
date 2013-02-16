@@ -99,6 +99,9 @@ class TabbedLexer
     lines.splice row+1, 0, pointer
     lines.join '\n'
 
+  showPosition: () ->
+    @pointTo @row, @col, @input
+
 class Rule
   constructor: (@pattern, @token) ->
   appliesTo: (part) ->
