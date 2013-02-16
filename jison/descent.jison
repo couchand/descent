@@ -5,6 +5,8 @@
 file
   : class_list NEWLINE EOF
     { return $class_list; }
+  | NEWLINE class_list NEWLINE EOF
+    { return $class_list; }
   ;
 
 class_list
