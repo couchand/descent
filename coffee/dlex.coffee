@@ -25,7 +25,7 @@ l /^\+/, '+'
 l /^,/, ','
 l /^\(/, '('
 l /^\)/, ')'
+l /^`[^`]*`/, 'APEX'
 l /^ /
-
 
 module.exports = basicLexer
