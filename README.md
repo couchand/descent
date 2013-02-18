@@ -6,7 +6,7 @@ Enlightened Apex development.
  * Introduction
  * Warning
  * Getting Started
- * Mode Information
+ * More Information
 
 Introduction
 ------------
