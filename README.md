@@ -135,6 +135,14 @@ automatically converts declaration assignments of class
 variables into lazy loaded properties, again making the
 assumption that it is best to apply the common pattern.
 
+Methods are indicated in descent in the same way that
+functions are written in CoffeeScript: with the function
+glyph: `->`.  If the method takes no parameters, the list
+of parameters is naturally optional.  You don't need to
+specify a return type: descent will infer it for you.  You
+don't even need to specify `return` -- as in CoffeeScript,
+the last thing you do will be automatically returned.
+
 Properties, methods, and classes can all have different
 types of modifiers in Apex.  In descent, many of these are
 not needed.  In particular:
