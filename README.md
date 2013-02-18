@@ -88,10 +88,12 @@ project.  What this means is that:
    a given client.
 
 The header of a class is the next place for optimization:
-Apex requires that you specify the visibility of a class,
-but descent uses the principle of convention over
-configuration.  Thus, if not specified, top level classes
-take the reasonable default of `public`.
+Apex requires that you specify both the keywork `class` and
+the visibility of a class, but descent makes the assumption
+that you want a class (unless you specify `trigger` or
+`interface`).  And descent uses the principle of convention
+over configuration.  Thus top level classes take the
+reasonable default of `public`.
 
 To mark a class as a test in Apex, you must use the keyword-
 annotation combo `@isTest private`.  In descent, you simply
