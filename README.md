@@ -6,6 +6,7 @@ Enlightened Apex development.
  * Introduction
  * Warning
  * Getting Started
+ * Philosopy
  * More Information
 
 Introduction
@@ -56,6 +57,56 @@ converted to a modern build tool.
 Once you've built successfully, parse away by running:
 
 	node dst/parser.js INPUT_FILE > OUTPUT_FILE
+
+Philosophy
+----------
+
+The goal of descent is to be as terse as possible while
+also being obvious.  The syntax is largely taken from
+CoffeeScript, as was much of the inspiration.  Since both
+engines aim to transpile code, and the structure of
+JavaScript is largely similar to that of Apex, this seems
+reasonable.
+
+It must be possible to express every important concept from
+Apex in this language.  Many things that must be made
+explicit in Apex can be left implicit in descent.  This
+makes it easy both to make a mistake and to find a mistake.
+
+Apex requires each class, interface and trigger to be written
+in its own file.  Descent dispenses with that idea, freeing
+you to keep whatever file structure is appropriate for the
+project.  What this means is that:
+
+ * A file can contain multiple classes.
+   This is to keep related functionality together:  keep a
+   class and its test in one file, or a trigger and the
+   associated service class.
+ * A class can span multiple files.
+   This is useful for mixin behavior:  have a standard set
+   of classes that are mixed in with custom behavior for
+   a given client.
+
+The header of a class is the next place for optimization:
+Apex requires that you specify the visibility of a class,
+but descent uses the principle of convention over
+configuration.  Thus, if not specified, top level classes
+take the reasonable default of `public`.
+
+To mark a class as a test in Apex, you must use the keyword-
+annotation combo `@isTest private`.  In descent, you simply
+say `test`.
+
+To extend a class in Apex requires the keyword `extend`,
+but in descent you simply use the character `&lt;`.  In Apex
+you must explicitly list any interfaces implemented by a
+class.  Descent works differently, using the principle of
+duck-typing: _if it looks like a duck, and quacks like a
+duck, it's probably a duck_.  If a class implements each
+of the methods specified in an interface, descent will
+automatically mark it as inheriting that interface.  This
+has profound implications on the type inference system,
+described later.
 
 More Information
 ----------------
