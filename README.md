@@ -87,6 +87,12 @@ project.  What this means is that:
    of classes that are mixed in with custom behavior for
    a given client.
 
+Just as in CoffeeScript, blocks are denoted with indentation
+instead of curly braces.  This makes for much cleaner source
+code, at the expense of having to maintain exacting indent
+standards.  Looking at the generated code is a great way to
+confirm that everything is working right.
+
 The header of a class is the next place for optimization:
 Apex requires that you specify both the keywork `class` and
 the visibility of a class, but descent makes the assumption
@@ -142,6 +148,10 @@ of parameters is naturally optional.  You don't need to
 specify a return type: descent will infer it for you.  You
 don't even need to specify `return` -- as in CoffeeScript,
 the last thing you do will be automatically returned.
+
+Inner classes are specified just like outer classes, but
+one level indented.  Just as in Apex, you can only write
+inner classes one level deep.
 
 Properties, methods, and classes can all have different
 types of modifiers in Apex.  In descent, many of these are
