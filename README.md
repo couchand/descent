@@ -108,11 +108,13 @@ automatically mark it as inheriting that interface.  This
 has profound implications on the type inference system,
 described later.
 
-Apex classes have four different types of members: methods,
-variables, properties, and inner classes.  Descent has only
-three, by abstracting the distinction between variables and
-properties.  Specifically, descent makes some assumptions
-about which you would like to use.
+Apex classes have six different types of members: variables,
+properties, inner classes, and static and instance
+initialization blocks.  Descent has only three.  First, no
+initialization blocks are allowed, due to the difficulty in
+debugging them.  Also the distinction between variables and
+properties is blurred.  Specifically, descent makes some
+assumptions about which you would like to use.
 
  * If a variable is written in ALL_CAPS, the resulting class
    member will default to `public static final`.
