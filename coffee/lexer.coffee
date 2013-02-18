@@ -2,6 +2,7 @@ class TabbedLexer
   constructor: (@tabstop = 2) ->
     @rules = []
     @tabchar = ' '
+    @commentchar = '#'
 
   setInput: (@input) ->
     @cursor = 0
@@ -20,14 +21,16 @@ class TabbedLexer
     return @awaiting.shift() if @awaiting.length and @eof()
     return 'EOF' if @eof()
 
-    newline_tokens = @checkForNewlines()
-    if newline_tokens.length
-      return newline_tokens[0] if newline_tokens.length is 1
-      @backlog = newline_tokens
-      return @backlog.shift()
-
     longest
     until longest?.rule?.token?
+      @checkForComment()
+
+      newline_tokens = @checkForNewlines()
+      if newline_tokens.length
+        return newline_tokens[0] if newline_tokens.length is 1
+        @backlog = newline_tokens
+        return @backlog.shift()
+
       longest = @getMatch()
       @cursor += longest.match.length
       @col += longest.match.length
@@ -55,6 +58,13 @@ class TabbedLexer
       longest = match if match.match.length > longest.match.length
     longest
 
+  checkForComment: ->
+    match = @input[@cursor..].match new RegExp "^#{@tabchar}*#{@commentchar}.*(?=\n)"
+    return no unless match
+    @cursor += match[0].length
+    @col += match[0].length
+    yes
+
   checkForNewlines: ->
     return [] unless @input[@cursor] is "\n"
     tokens = ['NEWLINE']
@@ -62,7 +72,7 @@ class TabbedLexer
     @row++
     @col = 0
 
-    blank_lines = @input[@cursor..].match new RegExp "^(#{@tabchar}*\n)+"
+    blank_lines = @input[@cursor..].match new RegExp "^(#{@tabchar}*(#{@commentchar}.*)?\n)+"
     if blank_lines
       @cursor += blank_lines[0].length
       newline_count = blank_lines[0].match /\n/g

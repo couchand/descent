@@ -77,6 +77,10 @@ if [ "$TEST" == 1 ] ; then
   echo "> node test/$BUILD_DIR/parser_test.js"
   node test/$BUILD_DIR/parser_test.js
 
+  echo "running comment test"
+  echo "> node test/$BUILD_DIR/comments_test.js"
+  node test/$BUILD_DIR/comments_test.js
+
   echo "running compiler tests"
   echo "> node test/$BUILD_DIR/compiler_test.js"
   node test/$BUILD_DIR/compiler_test.js
