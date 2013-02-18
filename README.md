@@ -33,7 +33,7 @@ Warning
 -------
 
 This readme is intended to be proscriptive, not descriptive.
-As always, the only true documentation is the code.e
+As always, the only true documentation is the code.
 
 Getting Started
 ---------------
