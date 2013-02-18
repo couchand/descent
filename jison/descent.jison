@@ -134,6 +134,8 @@ value
     { $$ = new ast.IntLiteral( yytext ); }
   | NEWLINE INDENT value DEDENT
     { $$ = $value; }
+  | embedded_apex
+    { $$ = $embedded_apex; }
   ;
 
 embedded_apex
