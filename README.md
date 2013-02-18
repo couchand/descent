@@ -126,6 +126,11 @@ code much faster -- the only reason not to make a class
 variable a property in Apex is the additional keystrokes
 required.
 
+Default values are common for class variables.  Descent
+automatically converts declaration assignments of class
+variables into lazy loaded properties, again making the
+assumption that it is best to apply the common pattern.
+
 More Information
 ----------------
 
