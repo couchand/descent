@@ -133,6 +133,50 @@ automatically converts declaration assignments of class
 variables into lazy loaded properties, again making the
 assumption that it is best to apply the common pattern.
 
+Properties, methods, and classes can all have different
+types of modifiers in Apex.  In descent, many of these are
+not needed.  In particular:
+
+ * The visibility modifiers `global`, `public`, `private`,
+   and `protected` are still used, though in some cases
+   they can be ignored.  Particularly:
+
+   * For classes and methods marked `test`, `private` is
+     assumed.
+   * For classes marked `webservice`, `global` is assumed.
+   * Methods and inner classes are assumed to have the
+     visibility of their containing class.  This is in
+     contrast to Apex.
+   * If nothing else would give something a visibility, it
+     is assumed to be `public`.
+
+ * The inheritance modifiers `virtual`, `abstract`, and
+   `override` are inferred.  Specifically:
+
+   * If a method overrides a method in a parent class, the
+     method will be marked `override` on the child and
+     `virtual` on the parent.
+   * If a method is declared but not defined, it will be
+     marked `abstract`.
+   * If a class has at least one abstract method, it will
+     be marked `abstract`.
+
+ * The modifier `final` is assumed for any variable written
+   in ALL_CAPS.
+ * The modifier `static` should be indicated with the scope
+   resolution operator `::` (and is assumed for any final
+   class variables).
+ * The modifier `transient` should be indicated with a tilde.
+ * The sharing modifier `with sharing` is assumed to enforce
+   the security model.  To overried:
+
+   * A single bang (`!`) will mark a class as not specified.
+     When the compiled Apex runs, this class with inherit
+     the sharing settings of the calling class.
+   * A double bang (`!!`) will mark a class as ignoring the
+     sharing rules.  The generated class will be marked as
+     `without sharing`.
+
 More Information
 ----------------
 
