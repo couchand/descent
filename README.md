@@ -108,6 +108,24 @@ automatically mark it as inheriting that interface.  This
 has profound implications on the type inference system,
 described later.
 
+Apex classes have four different types of members: methods,
+variables, properties, and inner classes.  Descent has only
+three, by abstracting the distinction between variables and
+properties.  Specifically, descent makes some assumptions
+about which you would like to use.
+
+ * If a variable is written in ALL_CAPS, the resulting class
+   member will default to `public static final`.
+ * If a variable is `private`, the class member will be a
+   regular Apex variable.
+ * Otherwise, the class member will be a property.
+
+This assumption that all class variables are properties is
+just one of the many ways that descent helps make writing
+code much faster -- the only reason not to make a class
+variable a property in Apex is the additional keystrokes
+required.
+
 More Information
 ----------------
 
