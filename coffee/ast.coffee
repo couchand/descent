@@ -18,26 +18,34 @@ class ApexClass
     @visibility = visibility or PUBLIC
     @properties = []
     @methods = []
-    @inners = []
+    @inner_classes = []
     @sortMembers body
 
   sortMembers: (members) ->
     for member in members
       @properties.push member if member instanceof Property
       @methods.push member if member instanceof Method
+      @inner_classes.push member if member instanceof InnerClass
 
   compile: ->
     visibility = @visibility.compile()
     props = indent (property.compile() for property in @properties).join '\n\n'
     meths = indent (method.compile() for method in @methods).join '\n\n'
+    inners = indent (inner.compile() for inner in @inner_classes).join '\n\n'
     """
     #{visibility} class #{@name}
     {
         #{props}
 
         #{meths}
+
+        #{inners}
     }
     """
+
+class InnerClass extends ApexClass
+  constructor: (name, visibility, body) ->
+    super name, visibility, body
 
 class Property
   constructor: (variable, visibility, def) ->
@@ -159,6 +167,7 @@ FINAL = new VisibilityType 'final'
 module.exports = {
   Body: Body
   ApexClass: ApexClass
+  InnerClass: InnerClass
   Property: Property
   Method: Method
   Variable: Variable

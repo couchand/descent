@@ -23,6 +23,13 @@ cls
     { $$ = new ast.ApexClass( $class_name, $visibility, $class_body ); }
   ;
 
+inner_cls
+  : CLASS class_name inner_class_body
+    { $$ = new ast.InnerClass( $class_name, null, $inner_class_body ); }
+  | CLASS visibility class_name inner_class_body
+    { $$ = new ast.InnerClass( $class_name, $visibility, $inner_class_body ); }
+  ;
+
 visibility
   : visibility_keyword
     { $$ = new ast.Visibility( $visibility_keyword ); }
@@ -55,6 +62,13 @@ class_body
     { $$ = $class_members; }
   ;
 
+inner_class_body
+  :
+    { $$ = []; }
+  | INDENT class_members DEDENT NEWLINE
+    { $$ = $class_members; }
+  ;
+
 class_members
   : class_member
     { $$ = [$class_member]; }
@@ -67,6 +81,8 @@ class_member
     { $$ = $property; }
   | method
     { $$ = $method; }
+  | inner_cls
+    { $$ = $inner_cls; }
   ;
 
 method
