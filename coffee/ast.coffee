@@ -32,14 +32,17 @@ class ApexClass
     props = indent (property.compile() for property in @properties).join '\n\n'
     meths = indent (method.compile() for method in @methods).join '\n\n'
     inners = indent (inner.compile() for inner in @inner_classes).join '\n\n'
+    all = []
+    all.push props if props isnt ''
+    all.push meths if meths isnt ''
+    all.push inners if inners isnt ''
+    members = all.join '\n\n'
+    header = "#{visibility} class #{@name}"
+    return "#{header} {}" if members is ''
     """
-    #{visibility} class #{@name}
+    #{header}
     {
-        #{props}
-
-        #{meths}
-
-        #{inners}
+        #{members}
     }
     """
 
