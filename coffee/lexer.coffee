@@ -1,3 +1,8 @@
+# general lexer class
+
+quote_pattern = /'/
+quoted_string_pattern = /'[^']*'/
+
 class TabbedLexer
   constructor: (@tabstop = 2) ->
     @rules = []
@@ -42,9 +47,18 @@ class TabbedLexer
     longest.rule.token
 
   getMatch: ->
+    str_literal = @checkForStringLiteral()
+    return str_literal if str_literal
     matches = @matchingRules()
     @lexingError "no match found" if matches.length is 0
     @longestOf matches
+
+  checkForStringLiteral: ->
+    return no unless @input[@cursor].match quote_pattern
+    return {
+      rule: { token: 'STRLITERAL' }
+      match: @input[@cursor..].match(quoted_string_pattern)[0]
+    }
 
   matchingRules: ->
     matches = for rule in @rules
@@ -116,7 +130,7 @@ class Rule
   constructor: (@pattern, @token) ->
   appliesTo: (part) ->
     match = part.match @pattern
-    if match then match[0] else false
+    if match then match[0] else no
 
 module.exports =
   TabbedLexer: TabbedLexer

@@ -22,6 +22,13 @@ assertEqual lexer.lex(), 'BAR', '4'
 assertEqual lexer.lex(), 'FOO', '2'
 assertEqual lexer.lex(), 'EOF', '5'
 
+# quoted strings
+
+lexer.setInput "foo 'look at my string' bar"
+
+assertEqual lexer.lex(), 'FOO', 'tokens before the string should lex'
+assertEqual lexer.lex(), 'STRLITERAL', 'string literals should lex'
+assertEqual lexer.lex(), 'BAR', 'tokens after the string should lex'
 
 # newlines and indents
 
