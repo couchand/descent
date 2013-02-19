@@ -59,9 +59,9 @@ class Property
     visibility = @visibility.compile()
     type = 'Object'
     v = @variable.compile()
-    if @visibility.hasFinal and @visibility.hasFinal()
+    if v.match /[A-Z_]+/
       return """
-             #{visibility} #{type} #{v} = #{@default_val.compile()};
+             #{visibility} static final #{type} #{v} = #{@default_val.compile()};
              """
 
     getter

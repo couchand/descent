@@ -48,8 +48,6 @@ visibility_keyword
     { $$ = ast.PRIVATE; }
   | STATIC
     { $$ = ast.STATIC; }
-  | FINAL
-    { $$ = ast.FINAL; }
   ;
 
 class_name

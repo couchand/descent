@@ -9,7 +9,6 @@ l = (pat, token) ->
 
 l /^( |\t)+/
 l /^\{\?STATIC\?\}/, 'STATIC'
-l /^\{\?FINAL\?\}/, 'FINAL'
 l /^\{\?METHOD\?\}/, 'METHOD'
 l /^\{\?CLASS\?\}/, 'CLASS'
 l /^global/i, 'GLOBAL'
