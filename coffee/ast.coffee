@@ -59,7 +59,7 @@ class Property
     visibility = @visibility.compile()
     type = 'Object'
     v = @variable.compile()
-    if v.match /[A-Z_]+/
+    if v.match /^[A-Z_]+$/
       return """
              #{visibility} static final #{type} #{v} = #{@default_val.compile()};
              """
