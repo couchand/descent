@@ -148,6 +148,8 @@ value
     { $$ = new ast.Variable( yytext ); }
   | NUM
     { $$ = new ast.IntLiteral( yytext ); }
+  | STRLITERAL
+    { $$ = new ast.StrLiteral( yytext ); }
   | NEWLINE INDENT value DEDENT
     { $$ = $value; }
   | embedded_apex

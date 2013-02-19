@@ -122,6 +122,10 @@ class IntLiteral
   constructor: (@value) ->
   compile: -> @value
 
+class StrLiteral
+  constructor: (@value) ->
+  compile: -> @value
+
 class EmbeddedApex
   constructor: (text) ->
     @value = text.slice 1, text.length-1
@@ -175,6 +179,7 @@ module.exports = {
   Method: Method
   Variable: Variable
   IntLiteral: IntLiteral
+  StrLiteral: StrLiteral
   Visibility: Visibility
   EmbeddedApex: EmbeddedApex
   GLOBAL: GLOBAL
