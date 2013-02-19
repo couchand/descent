@@ -30,6 +30,18 @@ assertEqual lexer.lex(), 'FOO', 'tokens before the string should lex'
 assertEqual lexer.lex(), 'STRLITERAL', 'string literals should lex'
 assertEqual lexer.lex(), 'BAR', 'tokens after the string should lex'
 
+lexer.setInput "foo 'look at mel\\'s string' bar"
+
+assertEqual lexer.lex(), 'FOO', 'tokens before the string should lex'
+assertEqual lexer.lex(), 'STRLITERAL', 'string literals with escaped quotes should lex'
+assertEqual lexer.lex(), 'BAR', 'tokens after the string should lex'
+
+lexer.setInput "foo 'look at mel\\'s string\\\\\\\\\\'' bar"
+
+assertEqual lexer.lex(), 'FOO', 'tokens before the string should lex'
+assertEqual lexer.lex(), 'STRLITERAL', 'string literals ending with escaped quotes preceeded by escaped slashes should lex'
+assertEqual lexer.lex(), 'BAR', 'tokens after the string should lex'
+
 # newlines and indents
 
 lexer.setInput 'foo\n  bar\n  baz\n\nfoo\n  bar\n    baz\n  foo'

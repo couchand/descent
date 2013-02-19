@@ -1,7 +1,6 @@
 # general lexer class
 
 quote_pattern = /'/
-quoted_string_pattern = /'[^']*'/
 
 class TabbedLexer
   constructor: (@tabstop = 2) ->
@@ -57,8 +56,24 @@ class TabbedLexer
     return no unless @input[@cursor].match quote_pattern
     return {
       rule: { token: 'STRLITERAL' }
-      match: @input[@cursor..].match(quoted_string_pattern)[0]
+      match: @findString()
     }
+
+  findString: ->
+    text =  @input[@cursor..]
+    stack = [text[0]]
+    cursor = 1
+    while stack.length
+      @lexingError "unmatched #{stack[0]}" if cursor is text.length
+      if text[cursor] is stack[stack.length-1]
+        stack.pop()
+      else if stack[stack.length-1] is '\\'
+        stack.pop()
+      else if text[cursor] is '\\'
+        stack.push '\\'
+      cursor++
+      break if stack.length is 0
+    return text[...cursor]
 
   matchingRules: ->
     matches = for rule in @rules
