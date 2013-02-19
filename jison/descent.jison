@@ -3,23 +3,27 @@
 %%
 
 file
-  : class_list NEWLINE EOF
+  : class_list EOF
+    { return $class_list; }
+  | class_list NEWLINE EOF
     { return $class_list; }
   | NEWLINE class_list NEWLINE EOF
+    { return $class_list; }
+  | NEWLINE class_list EOF
     { return $class_list; }
   ;
 
 class_list
   : cls
     { $$ = [$cls]; }
-  | class_list NEWLINE cls
+  | class_list cls
     { $$ = $class_list; $$.push($cls); }
   ;
 
 cls
-  : class_name NEWLINE class_body
+  : class_name class_body
     { $$ = new ast.ApexClass( $class_name, null, $class_body ); }
-  | visibility class_name NEWLINE class_body
+  | visibility class_name class_body
     { $$ = new ast.ApexClass( $class_name, $visibility, $class_body ); }
   ;
 
@@ -61,15 +65,17 @@ class_body
   ;
 
 inner_class_body
-  :
+  : NEWLINE
     { $$ = []; }
-  | INDENT class_members DEDENT NEWLINE
+  | INDENT class_members DEDENT
     { $$ = $class_members; }
   ;
 
 class_members
   : class_member
     { $$ = [$class_member]; }
+  | class_members class_member
+    { $$ = $class_members; $$.push($class_member) }
   | class_members NEWLINE class_member
     { $$ = $class_members; $$.push($class_member) }
   ;
@@ -119,7 +125,7 @@ param
 method_body
   : assignee
     { $$ = [$assignee]; }
-  | NEWLINE INDENT assignee DEDENT
+  | INDENT assignee DEDENT
     { $$ = [$assignee]; }
   ;
 
@@ -148,7 +154,7 @@ value
     { $$ = new ast.IntLiteral( yytext ); }
   | STRLITERAL
     { $$ = new ast.StrLiteral( yytext ); }
-  | NEWLINE INDENT value DEDENT
+  | INDENT value DEDENT
     { $$ = $value; }
   | embedded_apex
     { $$ = $embedded_apex; }

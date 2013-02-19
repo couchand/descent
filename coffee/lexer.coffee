@@ -96,7 +96,7 @@ class TabbedLexer
 
   checkForNewlines: ->
     return [] unless @input[@cursor] is "\n"
-    tokens = ['NEWLINE']
+    tokens = []
     @cursor++
     @row++
     @col = 0
@@ -123,7 +123,7 @@ class TabbedLexer
 
     @cursor += tab_chars
     @col += tab_chars
-    tokens
+    if tokens.length then tokens else ['NEWLINE']
 
   lexingError: (msg) ->
     inp = @pointTo @row, @col, @input
