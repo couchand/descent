@@ -15,8 +15,8 @@ rule = (pattern, replacer, replacement) ->
 
 r = (needle, flag, replacing) ->
   vis = "((global|public|readable|private|{\\?[A-Z]*\\?}) +)*"
-  pat = regex "^  #{vis}#{needle}.*$"
-  basicRewriter.rules.push if replacing? then rule pat, regex(replacing), "#{flag} " else rule pat, /^  /, "  #{flag} "
+  pat = regex "^  (  )?#{vis}#{needle}.*$"
+  basicRewriter.rules.push rule pat, /^  (  )?([a-zA-Z])/, "  $1#{flag} $2"
 
 # prepend function glyph to method declarations
 r '[a-z].*->', '{?METHOD?}'
