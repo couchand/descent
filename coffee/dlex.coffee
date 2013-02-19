@@ -8,7 +8,7 @@ l = (pat, token) ->
   basicLexer.rules.push new tl.Rule pat, token
 
 l /^( |\t)+/
-l /^\{\?STATIC\?\}/, 'STATIC'
+l /^::/, 'STATIC'
 l /^\{\?METHOD\?\}/, 'METHOD'
 l /^\{\?CLASS\?\}/, 'CLASS'
 l /^global/i, 'GLOBAL'

@@ -18,8 +18,6 @@ r = (needle, flag, replacing) ->
   pat = regex "^  #{vis}#{needle}.*$"
   basicRewriter.rules.push if replacing? then rule pat, regex(replacing), "#{flag} " else rule pat, /^  /, "  #{flag} "
 
-# replace static glyph on class-level members
-r '::', '{?STATIC?}', '::'
 # prepend function glyph to method declarations
 r '[a-z].*->', '{?METHOD?}'
 # prepend class glyph to inner class declarations
