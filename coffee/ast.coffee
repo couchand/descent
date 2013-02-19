@@ -29,14 +29,14 @@ class ApexClass
 
   compile: ->
     visibility = @visibility.compile()
-    props = indent (property.compile() for property in @properties).join '\n\n'
-    meths = indent (method.compile() for method in @methods).join '\n\n'
-    inners = indent (inner.compile() for inner in @inner_classes).join '\n\n'
+    props = (property.compile() for property in @properties).join '\n\n'
+    meths = (method.compile() for method in @methods).join '\n\n'
+    inners = (inner.compile() for inner in @inner_classes).join '\n\n'
     all = []
     all.push props if props isnt ''
     all.push meths if meths isnt ''
     all.push inners if inners isnt ''
-    members = all.join '\n\n'
+    members = indent all.join '\n\n'
     header = "#{visibility} class #{@name}"
     return "#{header} {}" if members is ''
     """
