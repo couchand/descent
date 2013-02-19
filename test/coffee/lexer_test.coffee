@@ -24,7 +24,7 @@ assertEqual lexer.lex(), 'EOF', '5'
 
 # quoted strings
 
-lexer.setInput "foo 'look at my string' bar"
+lexer.setInput "foo 'look at\nmy string' bar"
 
 assertEqual lexer.lex(), 'FOO', 'tokens before the string should lex'
 assertEqual lexer.lex(), 'STRLITERAL', 'string literals should lex'
