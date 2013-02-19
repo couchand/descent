@@ -14,7 +14,7 @@ rule = (pattern, replacer, replacement) ->
   new rr.RewriteRule pattern, replacer, replacement
 
 r = (needle, flag, replacing) ->
-  vis = "((global|public|readable|private|{\\?[A-Z]*\\?}) *)*"
+  vis = "((global|public|readable|private|{\\?[A-Z]*\\?}) +)*"
   pat = regex "^  #{vis}#{needle}.*$"
   basicRewriter.rules.push if replacing? then rule pat, regex(replacing), "#{flag} " else rule pat, /^  /, "  #{flag} "
 
