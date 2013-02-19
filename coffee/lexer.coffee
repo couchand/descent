@@ -1,6 +1,6 @@
 # general lexer class
 
-quote_pattern = /'/
+quote_pattern = /['"]/
 
 class TabbedLexer
   constructor: (@tabstop = 2) ->
