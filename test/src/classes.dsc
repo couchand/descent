@@ -6,7 +6,7 @@ global Baz
   global InnerGlobal
   private InnerPrivate
 
-@isTest private FoobarTest
+test Foobar
   FoobarMock extends Foobar
   InnerPublicMock extends Foobar.InnerPublic
 
