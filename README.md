@@ -200,6 +200,8 @@ not needed.  In particular:
 More Information
 ----------------
 
+<http://www.paulgraham.com/design.html>
+
 There are more superballs in the world than there are people.
 I don't know that, I'm just assuming.  I mean, I have like
 twenty myself in the back of a drawer somewhere.
