@@ -65,7 +65,7 @@ class_body
   ;
 
 inner_class_body
-  :
+  : NEWLINE
     { $$ = []; }
   | INDENT class_members DEDENT
     { $$ = $class_members; }
